@@ -54,12 +54,8 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-" set background=dark
-" colorscheme industry
 set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 
 " mouse
@@ -68,13 +64,9 @@ set mouse=a
 " line numbers
 set number
 
-" NERDtree
-" open on startup
-" autocmd vimenter * NERDTree
 " close vim if only window open is nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " focus to file when opened in new tab
-" autocmd VimEnter * wincmd p
 nmap <c-n> :NERDTreeToggle<CR>
 
 
@@ -83,13 +75,9 @@ autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 
 " fuzzy file search
 map ; :Files<CR>
-" map <c-p> :Files<CR>
-
 
 " Fix files with prettier, and then ESLint.
-" let b:ale_fixers = ['prettier', 'eslint']
-" Equivalent to the above.
-" let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 
 
 if !has('gui_running')
@@ -98,3 +86,7 @@ endif
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
+set laststatus=2
+
+" toggle highlight search 
+map <c-h> :set hlsearch!
