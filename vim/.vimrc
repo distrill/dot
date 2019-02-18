@@ -32,22 +32,18 @@ Plugin 'itchyny/lightline.vim'
 " comments hotkey
 Plugin 'tomtom/tcomment_vim'
 
+" git status in file gutter
+Plugin 'airblade/vim-gitgutter'
+
+" distraction free writing
+Plugin 'junegunn/goyo.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"
+
+" user config
 
 " make backspace work like in most other programs
 set backspace=indent,eol,start
@@ -78,7 +74,9 @@ map ; :Files<CR>
 
 " Fix files with prettier, and then ESLint.
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-
+let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
+let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1
 
 if !has('gui_running')
   set t_Co=256
@@ -90,3 +88,6 @@ set laststatus=2
 
 " toggle highlight search 
 map <c-h> :set hlsearch!
+
+" distraction free mode
+map <c-i> :Goyo
