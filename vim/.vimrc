@@ -50,9 +50,10 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-set termguicolors     " enable true colors support
-let ayucolor="mirage" " for mirage version of theme
-colorscheme ayu
+" set termguicolors     " enable true colors support
+" let ayucolor="mirage" " for mirage version of theme
+" colorscheme ayu
+colorscheme delek
 
 " mouse
 set mouse=a
@@ -64,6 +65,8 @@ set number
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " focus to file when opened in new tab
 nmap <c-n> :NERDTreeToggle<CR>
+" get rid of weird ^G character in nerdTREE
+let g:NERDTreeNodeDelimiter = "\u00a0"
 
 
 " tabs/spaces by filetype
@@ -77,6 +80,7 @@ let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
 
 if !has('gui_running')
   set t_Co=256
@@ -87,7 +91,26 @@ let g:lightline = {
 set laststatus=2
 
 " toggle highlight search 
-map <c-h> :set hlsearch!
+map <c-h> :set hlsearch! <CR>
 
 " distraction free mode
-map <c-i> :Goyo
+map <c-i> :Goyo <CR>
+
+" fzf buffer
+map <c-p> :Buffers <CR>
+
+" command / for t-comment
+map <M-/> :Tcomment
+
+" shut up stupid bell
+set belloff=all
+
+" fzf
+:let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
+
+" copy (yank) to clickboard
+vmap yy :w !pbcopy <CR> <CR>
+
+" no word wrap pls
+set nowrap
+
