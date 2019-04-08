@@ -75,6 +75,8 @@ autocmd Filetype sass setlocal ts=2 sw=2 sts=0 expandtab
 
 " fuzzy file search
 map ; :Files<CR>
+map <c-p> :Buffers <CR>
+:let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " Fix files with prettier, and then ESLint.
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
@@ -95,22 +97,16 @@ set laststatus=2
 map <c-h> :set hlsearch! <CR>
 
 " distraction free mode
-map <c-i> :Goyo  120 <CR>
+map <c-i> :Goyo <CR>
 
-" fzf buffer
-map <c-p> :Buffers <CR>
 
 " shut up stupid bell
 set belloff=all
-
-" fzf
-:let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " no word wrap pls
 set nowrap
 
 " copy selection to clipboard
-" vmap <c-y> :w<Home>silent <End> !pbcopy <CR>
 set clipboard=unnamed
 
 " splits
