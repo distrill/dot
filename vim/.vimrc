@@ -71,6 +71,7 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 
 " tabs/spaces by filetype
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype sass setlocal ts=2 sw=2 sts=0 expandtab
 
 " fuzzy file search
 map ; :Files<CR>
@@ -94,13 +95,10 @@ set laststatus=2
 map <c-h> :set hlsearch! <CR>
 
 " distraction free mode
-map <c-i> :Goyo <CR>
+map <c-i> :Goyo  120 <CR>
 
 " fzf buffer
 map <c-p> :Buffers <CR>
-
-" command / for t-comment
-map <M-/> :Tcomment
 
 " shut up stupid bell
 set belloff=all
@@ -108,9 +106,14 @@ set belloff=all
 " fzf
 :let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
-" copy (yank) to clickboard
-vmap yy :w !pbcopy <CR> <CR>
-
 " no word wrap pls
 set nowrap
+
+" copy selection to clipboard
+" vmap <c-y> :w<Home>silent <End> !pbcopy <CR>
+set clipboard=unnamed
+
+" splits
+nmap :vs :vsplit
+nmap :hs :split
 
