@@ -105,9 +105,6 @@ set belloff=all
 " no word wrap pls
 set nowrap
 
-" copy selection to clipboard
-set clipboard=unnamed
-
 " search for visually selected text
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>``
 
@@ -119,3 +116,6 @@ set splitright
 
 " fuck you swap files
 set noswapfile
+
+" allow h and l to wrap previous and next lines
+set whichwrap+=<,>,h,l,[,]
