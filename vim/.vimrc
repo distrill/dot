@@ -38,6 +38,8 @@ Plugin 'airblade/vim-gitgutter'
 " distraction free writing
 Plugin 'junegunn/goyo.vim'
 
+" search file contents
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,9 +52,6 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-" set termguicolors     " enable true colors support
-" let ayucolor="mirage" " for mirage version of theme
-" colorscheme ayu
 colorscheme delek
 
 " mouse
@@ -109,7 +108,14 @@ set nowrap
 " copy selection to clipboard
 set clipboard=unnamed
 
+" search for visually selected text
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>``
+
 " splits
 nmap :vs :vsplit
 nmap :hs :split
+set splitbelow
+set splitright
 
+" fuck you swap files
+set noswapfile
