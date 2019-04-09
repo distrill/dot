@@ -54,17 +54,17 @@ set backspace=indent,eol,start
 syntax on
 colorscheme delek
 
-" mouse
+" all the mouse support
 set mouse=a
 
 " line numbers
 set number
 
-" close vim if only window open is nerdtree
+" close vim if only window open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " focus to file when opened in new tab
 nmap <c-n> :NERDTreeToggle<CR>
-" get rid of weird ^G character in nerdTREE
+" get rid of weird ^G character in NERDTree
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
 
@@ -98,7 +98,6 @@ map <c-h> :set hlsearch! <CR>
 " distraction free mode
 map <c-i> :Goyo <CR>
 
-
 " shut up stupid bell
 set belloff=all
 
@@ -119,3 +118,10 @@ set noswapfile
 
 " allow h and l to wrap previous and next lines
 set whichwrap+=<,>,h,l,[,]
+
+" yank to clipboard
+vmap <c-y> "+y
+
+set spelllang=en
+set spell
+map nw zg
