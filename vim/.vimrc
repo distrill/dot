@@ -41,6 +41,12 @@ Plugin 'junegunn/goyo.vim'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
+"ayu theme
+Plugin 'ayu-theme/ayu-vim'
+
+" rust as
+Plugin 'rust-lang/rust.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,7 +58,12 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-colorscheme delek
+" colorscheme delek
+set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " all the mouse support
 set mouse=a
@@ -60,12 +71,11 @@ set mouse=a
 " line numbers
 set number
 
-" close vim if only window open is NERDTree
+" NERDTree et all
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" focus to file when opened in new tab
-nmap <c-n> :NERDTreeToggle<CR>
-" get rid of weird ^G character in NERDTree
 let g:NERDTreeNodeDelimiter = "\u00a0"
+nmap <c-n> :NERDTreeToggle <CR>
+nmap <c-m> :NERDTreeFocus <CR>
 
 
 " tabs/spaces by filetype
@@ -78,11 +88,12 @@ map <c-p> :Buffers <CR>
 :let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'rust': ['rustfmt']}
 let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:rustfmt_autosave = 1
 
 if !has('gui_running')
   set t_Co=256
@@ -113,6 +124,9 @@ nmap :hs :split
 set splitbelow
 set splitright
 
+" yank to clipboard
+vmap <c-y> “+y
+
 " fuck you swap files
 set noswapfile
 
@@ -122,6 +136,22 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
+" start
+" jump to definition
+nmap <C-]> :YcmCompleter GoToDefinition<cr>
+
+" write good
 set spelllang=en
 set spell
-map nw zg
+set spellcapcheck=$a
+" map nw zg
+
+" tab to indent unindent
+vnoremap <Tab>   ><CR>gv
+vnoremap <S-Tab> <<CR>gv
+" chevrons to indent unindent
+vnoremap >       ><CR>gv
+vnoremap <       <<CR>gv
+
+" border on vertical window split
+highlight VertSplit cterm=none gui=none
