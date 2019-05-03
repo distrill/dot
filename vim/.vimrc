@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 
-" lint
+" " lint
 Plugin 'w0rp/ale'
 
 " pretty line
@@ -41,6 +41,15 @@ Plugin 'junegunn/goyo.vim'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
+" preview colors in css
+Plugin 'ap/vim-css-color'
+
+" fugitive, git plugin
+Plugin 'tpope/vim-fugitive'
+
+" ayu colors
+Plugin 'ayu-theme/ayu-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,7 +61,9 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-colorscheme delek
+set termguicolors
+let ayucolor="mirage"
+colorscheme ayu
 
 " all the mouse support
 set mouse=a
@@ -62,10 +73,11 @@ set number
 
 " close vim if only window open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" focus to file when opened in new tab
-nmap <c-n> :NERDTreeToggle<CR>
 " get rid of weird ^G character in NERDTree
 let g:NERDTreeNodeDelimiter = "\u00a0"
+map <c-m> :NERDTreeFocus <CR>
+map <c-n> :NERDTreeToggle <CR>
+map <c-k> :NERDTreeFind <CR>
 
 
 " tabs/spaces by filetype
@@ -122,6 +134,8 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
+" spell good
 set spelllang=en
 set spell
-map nw zg
+set spellcapcheck=
+
