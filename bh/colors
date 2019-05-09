@@ -1,0 +1,19 @@
+#! /bin/bash
+
+export BLACK=\#16130F
+export RED=\#826D57
+export GREEN=\#57826D
+export BROWN=\#6D8257
+export BLUE=\#6D5782
+export MAGENTA=\#82576D
+export CYAN=\#576D82
+export LIGHT_GREY=\#A39A90
+export DARK_GREY=\#5A5047
+export LIGHT_RED=\#826D57
+export LIGHT_GREEN=\#57826D
+export YELLOW=\#6D8257
+export LIGHT_BLUE=\#7692AD
+export LIGHT_MAGENTA=\#82576D
+export LIGHT_CYAN=\#576D82
+export WHITE=\#DBD6D1
+
