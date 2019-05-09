@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# put everything back
+mv ~/.ssh/id_rsa_old ~/.ssh/id_rsa
+mv ~/.ssh/id_rsa.pub_old ~/.ssh/id_rsa.pub
+

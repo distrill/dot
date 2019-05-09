@@ -1,0 +1,60 @@
+[colors]
+background = ${env:BLACK}
+foreground = ${env:LIGHT_GREY}
+blue = ${env:LIGHT_BLUE}
+green = ${env:GREEN}
+yellow = ${env:YELLOW}
+red = ${env:RED}
+
+[bar/bh]
+monitor = ${env:MONITOR}
+width = 3832
+margin-left = 10
+height = 50
+offset-x = 4
+offset-y = 4
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+enable-ipc = true
+
+font-0 = inconsolata:pixelsize=18
+# font-1 = materialicons:pixelsize=16;+3
+
+override-redirect = true
+
+modules-left = bspwm
+modules-right = date
+modules-center = title
+
+
+[module/bspwm]
+type = internal/bspwm
+padding = 1
+
+label-focused = x
+label-focused-padding = ${self.padding}
+label-focused-underline= ${colors.blue}
+
+label-urgent = %index%
+label-urgent-padding = ${self.padding}
+label-urgent-underline = ${colors.red}
+
+label-occupied = %index%
+label-occupied-padding = ${self.padding}
+
+label-empty = %index%
+label-empty-padding = ${self.padding}
+
+[module/title]
+type = internal/xwindow
+
+[module/date]
+type = internal/date
+interval = 1.0
+time = "    %H:%M   "
+time-alt = " %Y-%m-%d "
+label = %date% %time%
+

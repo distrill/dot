@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# move current keys out of way
+mv ~/.ssh/id_rsa ~/.ssh/id_rsa_old
+mv ~/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub_old
+
+# get project private key and generate public
+cp /home/arthur/Development/orwell/docker/id_github_deployment.rsa ~/.ssh/id_rsa
+chmod 400 ~/.ssh/id_rsa
+ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+

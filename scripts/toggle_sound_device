@@ -1,0 +1,12 @@
+#!/bin/bash
+
+headphones=alsa_output.usb-Nuforce_Inc._NuForce_USB_Audio-01.analog-stereo
+speakers=alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device-00.analog-stereo
+
+newSink=$(pactl list short sinks | grep "${headphones}\|${speakers}" | grep -v RUNNING | awk '{print $2}')
+
+pactl list short sink-inputs|while read stream; do
+    streamId=$(echo $stream|cut '-d ' -f1)
+    echo "moving stream $streamId"
+    pactl move-sink-input "$streamId" "$newSink"
+done
