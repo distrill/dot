@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 
-" lint
+" " lint
 Plugin 'w0rp/ale'
 
 " pretty line
@@ -35,9 +35,6 @@ Plugin 'tomtom/tcomment_vim'
 " git status in file gutter
 Plugin 'airblade/vim-gitgutter'
 
-" distraction free writing
-Plugin 'junegunn/goyo.vim'
-
 " search file contents
 Plugin 'mileszs/ack.vim'
 
@@ -46,6 +43,13 @@ Plugin 'ayu-theme/ayu-vim'
 
 " rust as
 Plugin 'rust-lang/rust.vim'
+
+" preview colors in css
+Plugin 'ap/vim-css-color'
+
+" fugitive, git plugin
+Plugin 'tpope/vim-fugitive'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,11 +62,8 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-" colorscheme delek
-set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
+set termguicolors
+let ayucolor="mirage"
 colorscheme ayu
 
 " all the mouse support
@@ -74,8 +75,9 @@ set number
 " NERDTree et all
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeNodeDelimiter = "\u00a0"
-nmap <c-n> :NERDTreeToggle <CR>
-nmap <c-m> :NERDTreeFocus <CR>
+map <c-m> :NERDTreeFocus <CR>
+map <C-n> :NERDTreeToggle<CR>
+map <c-k> :NERDTreeFind <CR>
 
 
 " tabs/spaces by filetype
@@ -106,9 +108,6 @@ set laststatus=2
 " toggle highlight search 
 map <c-h> :set hlsearch! <CR>
 
-" distraction free mode
-map <c-i> :Goyo <CR>
-
 " shut up stupid bell
 set belloff=all
 
@@ -136,22 +135,7 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
-" start
-" jump to definition
-nmap <C-]> :YcmCompleter GoToDefinition<cr>
-
 " write good
 set spelllang=en
 set spell
 set spellcapcheck=$a
-" map nw zg
-
-" tab to indent unindent
-vnoremap <Tab>   ><CR>gv
-vnoremap <S-Tab> <<CR>gv
-" chevrons to indent unindent
-vnoremap >       ><CR>gv
-vnoremap <       <<CR>gv
-
-" border on vertical window split
-highlight VertSplit cterm=none gui=none
