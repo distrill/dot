@@ -3,7 +3,7 @@
 source /home/arthur/.config/bh/colors
 
 sxhkd &
-/home/arthur/Development/scripts/startup.sh
+~/Development/scripts/startup.sh
 
 bspc monitor HDMI-0 	-d I II III IV V VI VII VIII IX X
 # bspc monitor HDMI-0 	-d I II III IV V
