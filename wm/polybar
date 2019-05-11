@@ -1,0 +1,85 @@
+#
+# colors mapped
+#
+[colors]
+background = ${env:PRIMARY_BACKGROUND}
+foreground = ${env:PRIMARY_FOREGROUND}
+black = ${env:NORMAL_BLACK}
+white = ${env:BRIGHT_WHITE}
+blue = ${env:BRIGHT_BLUE}
+green = ${env:BRIGHT_GREEN}
+yellow = ${env:BRIGHT_MAGENTA}
+red = ${env:BRIGHT_RED}
+less-green = ${env:NORMAL_GREEN}
+bright-cyan = ${env:BRIGHT_CYAN}
+
+[bar/bh]
+monitor = e-DP-1
+width = 100%
+module-margin = 2
+padding = 4
+height = 60
+underline-size = 8
+underline-color = ${colors.foreground}
+format-underline = ${colors.foreground}
+font-0 = Menlo:pixelsize=20
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+modules-left = bspwm
+modules-center = title
+modules-right = wireless-network battery date
+
+[module/bspwm]
+type = internal/bspwm
+padding = 2
+
+label-focused = •
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
+label-focused-padding = ${self.padding}
+label-focused-underline= ${colors.blue}
+
+label-urgent = !!
+
+label-urgent-padding = ${self.padding}
+label-urgent-underline = ${colors.red}
+
+label-occupied = %index%
+label-occupied-padding = ${self.padding}
+label-occupied-underline = ${colors.blue}
+
+label-empty = %index%
+label-empty-padding = ${self.padding}
+
+
+[module/title]
+type = internal/xwindow
+format-underline = ${colors.red}
+
+[module/wireless-network]
+type = internal/network
+interface = wlp58s0
+label-connected = %essid% 
+label-disconnected = "searching..."
+label-connected-underline = ${colors.blue}
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 5
+margin-left = 10
+label-charging = +%percentage%%
+label-discharging = %percentage%%
+label-charging-underline = ${colors.green}
+label-discharging-underline = ${colors.less-green}
+
+[module/date]
+type = internal/date
+interval = 1.0
+time = "%H:%M"
+label = %date% %time%
+format-underline = ${colors.yellow}
