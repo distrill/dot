@@ -1,12 +1,29 @@
-#! /bin/sh
+#!/bin/sh
 
 compton &
 mopidy &
-/home/arthur/Development/scripts/polybar.sh &
-nitrogen --restore &
-xinput --set-prop 11 "libinput Accel Speed" "1"
-# xrandr --output DVI-D-0 --auto --left-of HDMI-0 & 
-xset r rate 200 25
+~/Development/scripts/polybar.sh &
 
-export QT_AUTO_SCREEN_SCALE_FACTOR=1.5
-export GDK_SCALE=1.5
+# background
+nitrogen --restore &
+
+# notifications
+/usr/bin/dunst &
+
+# trackpad
+id=$(xinput list | grep Touchpad | awk '{print $6}' | sed s/id=//)
+xinput set-prop ${id} "libinput Accel Speed" +0.5
+xinput set-prop ${id} "libinput Natural Scrolling Enabled" 1
+xinput set-prop ${id} "libinput Tapping Enabled" 1
+xinput set-prop ${id} "libinput Click Method Enabled" 0 1
+# multitouch gestures
+fusuma &
+# hjkl arrows
+xmodmap ~/Development/scripts/my_keyboard &
+
+# repeating key rate
+xset r rate 200 30 &
+xsetroot -cursor_name left_ptr
+
+export QT_AUTO_SCREEN_SCALE_FACTOR=2
+export GDK_SCALE=2
