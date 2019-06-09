@@ -36,8 +36,8 @@ type = internal/bspwm
 padding = 2
 
 label-focused = •
-label-focused-background = ${colors.foreground}
-label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.foreground}
 label-focused-padding = ${self.padding}
 label-focused-underline= ${colors.blue}
 
@@ -74,8 +74,9 @@ poll-interval = 5
 margin-left = 10
 label-charging = +%percentage%%
 label-discharging = %percentage%%
-label-charging-underline = ${colors.green}
+label-charging-underline = ${colors.less-green}
 label-discharging-underline = ${colors.less-green}
+label-full-underline = ${colors.less-green}
 
 [module/date]
 type = internal/date

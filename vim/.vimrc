@@ -38,8 +38,10 @@ Plugin 'airblade/vim-gitgutter'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
-"ayu theme
+"colors theme
 Plugin 'ayu-theme/ayu-vim'
+Plugin 'larsbs/vimterial_dark'
+Plugin 'dsolstad/vim-wombat256i'
 
 " rust as
 Plugin 'rust-lang/rust.vim'

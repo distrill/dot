@@ -8,7 +8,8 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run -font "Menlo 24" -hide-scrollbar -color-window "#ffffff, #59c2ff, #0a0e14" -color-normal "#c7c7c7, #0a0e14, #ffffff, #0a0e14, #c2d94c" -bw 4
+	~/Development/scripts/rofi.sh
+#	rofi -show run -font "Menlo 24" -hide-scrollbar -color-window "#ffffff, #59c2ff, #0a0e14" -color-normal "#c7c7c7, #0a0e14, #ffffff, #0a0e14, #c2d94c" -bw 4
 
 # super + Escape
 # 	rofi -show window

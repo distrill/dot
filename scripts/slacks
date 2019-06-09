@@ -1,0 +1,4 @@
+#!/bin/bash
+
+google-chrome-stable --new-window https://veryofficial-business.slack.com/ https://blockcat.slack.com https://strawhouse.slack.com https://cucumbercollective.slack.com
+
