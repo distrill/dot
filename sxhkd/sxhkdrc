@@ -140,15 +140,13 @@ super + {Left,Down,Up,Right}
 # escrotum
 ctrl + shift + m
 	gscreenshot-cli -sc
-ctrl + shift + n
-	gscreenshot-cli -c
+
+ctrl + shift + h
+	~/Development/scripts/toggle_sound_device 
 
 # screen lock
 ctrl + shift + l
 	xscreensaver & xscreensaver-command -lock
-
-ctrl + shift + h
-	~/Development/scripts/toggle_sound_device 
 
 # media keys
 XF86AudioRaiseVolume

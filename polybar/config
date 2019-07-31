@@ -14,7 +14,7 @@ less-green = ${env:NORMAL_GREEN}
 bright-cyan = ${env:BRIGHT_CYAN}
 
 [bar/bh]
-monitor = e-DP-1
+monitor = ${env:MONITOR}
 width = 100%
 module-margin = 2
 padding = 4
@@ -23,13 +23,19 @@ underline-size = 8
 underline-color = ${colors.foreground}
 format-underline = ${colors.foreground}
 font-0 = Menlo:pixelsize=20
+font-1 = "Font Awesome 5 Brands,Font Awesome 5 Brands Regular:style=Regular"
+font-2 = "Unifont:style=Medium"
+font-3 = "Material Icons:style=Regular"
+font-4 = Unifont
+font-5 = "Noto Sans Symbols2:style=Regular"
+
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
 modules-left = bspwm
-modules-right = wireless-network battery date
 modules-center = title
+modules-right = wireless-network vpn battery date
 
 [module/bspwm]
 type = internal/bspwm
@@ -81,7 +87,14 @@ label-full-underline = ${colors.less-green}
 [module/date]
 type = internal/date
 interval = 1.0
-time = "%H:%M"
-time-alt = " %Y-%m-%d "
+time = "%H:%M  "
+time-alt = "%Y-%m-%d  "
 label = %date% %time%
 format-underline = ${colors.yellow}
+
+[module/vpn]
+type = custom/script
+exec = ~/Development/scripts/vpnstatus.sh 
+exec-if = pgrep -x openvpn
+interval = 5
+format-underline = ${colors.green}
