@@ -28,16 +28,16 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 modules-left = bspwm
-modules-center = title
 modules-right = wireless-network battery date
+modules-center = title
 
 [module/bspwm]
 type = internal/bspwm
 padding = 2
 
 label-focused = •
-label-focused-background = ${colors.background}
-label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
 label-focused-padding = ${self.padding}
 label-focused-underline= ${colors.blue}
 
@@ -82,5 +82,6 @@ label-full-underline = ${colors.less-green}
 type = internal/date
 interval = 1.0
 time = "%H:%M"
+time-alt = " %Y-%m-%d "
 label = %date% %time%
 format-underline = ${colors.yellow}

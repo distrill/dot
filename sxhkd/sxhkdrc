@@ -104,6 +104,10 @@ super + {_,shift + }{1-9,0}
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
+# cancel preselection
+super + ctrl + p
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
@@ -136,6 +140,8 @@ super + {Left,Down,Up,Right}
 # escrotum
 ctrl + shift + m
 	gscreenshot-cli -sc
+ctrl + shift + n
+	gscreenshot-cli -c
 
 # screen lock
 ctrl + shift + l
@@ -146,10 +152,10 @@ ctrl + shift + h
 
 # media keys
 XF86AudioRaiseVolume
-	pactl -- set-sink-volume 0 +10%
+	pactl -- set-sink-volume 0 +3%
 
 XF86AudioLowerVolume
-	pactl -- set-sink-volume 0 -10%
+	pactl -- set-sink-volume 0 -3%
 
 XF86AudioMute
 	pactl set-sink-mute 0 toggle

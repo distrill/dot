@@ -138,6 +138,6 @@ set whichwrap+=<,>,h,l,[,]
 vmap <c-y> "+y
 
 " write good
-set spelllang=en
-set spell
-set spellcapcheck=$a
+" set spelllang=en
+" set spell
+" set spellcapcheck=$a
