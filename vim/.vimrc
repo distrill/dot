@@ -42,6 +42,10 @@ Plugin 'mileszs/ack.vim'
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'larsbs/vimterial_dark'
 Plugin 'dsolstad/vim-wombat256i'
+Plugin 'bluz71/vim-moonfly-colors'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'dim13/smyck.vim'
+Plugin 'w0ng/vim-hybrid'
 
 " rust as
 Plugin 'rust-lang/rust.vim'
@@ -55,8 +59,14 @@ Plugin 'tpope/vim-fugitive'
 " python indent
 Plugin 'vim-scripts/indentpython.vim'
 
+" go
+Plugin 'fatih/vim-go'
+
 " pep8
 Plugin 'nvie/vim-flake8'
+
+" zoom or unzoom current window
+Plugin 'taylor/vim-zoomwin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -67,11 +77,19 @@ filetype plugin indent on    " required
 " make backspace work like in most other programs
 set backspace=indent,eol,start
 
+
+if has("gui_running")
+  syntax on
+  set hlsearch
+  colorscheme hybrid
+  set bs=2
+  set ai
+  set ruler
+endif
 " colors
 syntax on
 set termguicolors
-let ayucolor="mirage"
-colorscheme ayu
+colorscheme hybrid
 
 " all the mouse support
 set mouse=a
@@ -84,7 +102,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeNodeDelimiter = "\u00a0"
 map <c-m> :NERDTreeFocus <CR>
 map <C-n> :NERDTreeToggle<CR>
-map <c-k> :NERDTreeFind <CR>
+map <c-b> :NERDTreeFind <CR>
+nmap <c-b> :NERDTreeFind<CR>
 
 
 " tabs/spaces by filetype
@@ -97,12 +116,17 @@ map <c-p> :Buffers <CR>
 :let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'rust': ['rustfmt']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'rust': ['rustfmt'], 'go': ['goimports']}
 let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:rustfmt_autosave = 1
+
+" jump to ale errors
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 
 if !has('gui_running')
   set t_Co=256
@@ -142,27 +166,20 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
-set spelllang=en
-set spell
-set spellcapcheck=$a
+set nospell
+" set spelllang=en
+" set spell
+" set spellcapcheck=$a
 
-" python things
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+" fzf rg shortcut
+nmap <c-i> :Rg <CR>
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
 
+" tmux
+set ttymouse=xterm2
+set mouse=a
+if exists('+termguicolors')
+	  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	      set termguicolors
+      endif
