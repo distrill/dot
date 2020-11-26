@@ -23,7 +23,10 @@ xmodmap ~/Development/scripts/my_keyboard &
 
 # repeating key rate
 xset r rate 200 30 &
-xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr &
+
+# san mateo, ca
+redshift -l 37.547150:-122.314400 &
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=2
 export GDK_SCALE=2

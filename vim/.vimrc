@@ -38,10 +38,22 @@ Plugin 'airblade/vim-gitgutter'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
+" zoom window
+Plugin 'taylor/vim-zoomwin'
+
+" markdown things
+Plugin 'iamcco/markdown-preview.nvim'
+
 "colors theme
 Plugin 'ayu-theme/ayu-vim'
 Plugin 'larsbs/vimterial_dark'
 Plugin 'dsolstad/vim-wombat256i'
+Plugin 'romainl/Apprentice'
+Plugin 'jdsimcoe/abstract.vim'
+Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
+Plugin 'rafi/awesome-vim-colorschemes'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'morhetz/gruvbox'
 
 " rust as
 Plugin 'rust-lang/rust.vim'
@@ -58,6 +70,25 @@ Plugin 'vim-scripts/indentpython.vim'
 " pep8
 Plugin 'nvie/vim-flake8'
 
+" javascript as
+Plugin 'othree/yajs.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'prettier/vim-prettier'
+
+" go as
+Plugin 'fatih/vim-go'
+
+" hack as
+Plugin 'hhvm/vim-hack'
+
+" graphql
+Plugin 'jparise/vim-graphql'
+
+Plugin 'neovimhaskell/haskell-vim'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -69,9 +100,12 @@ set backspace=indent,eol,start
 
 " colors
 syntax on
-set termguicolors
-let ayucolor="mirage"
-colorscheme ayu
+" set termguicolors
+" let ayucolor="mirage"
+set background=dark
+" colorscheme hybrid
+colorscheme gruvbox
+let g:hybrid_custom_term_colors = 1
 
 " all the mouse support
 set mouse=a
@@ -85,10 +119,17 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 map <c-m> :NERDTreeFocus <CR>
 map <C-n> :NERDTreeToggle<CR>
 map <c-k> :NERDTreeFind <CR>
+let g:NERDTreeIgnore = ['^node_modules$']
 
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.ts, set filetype=typescript
 
 " tabs/spaces by filetype
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype javascript.jsx setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype typescript setlocal ts=2 sw=2 sts=0 expandtab
+autocmd Filetype typescript.tsx setlocal ts=2 sw=2 sts=0 expandtab
 autocmd Filetype sass setlocal ts=2 sw=2 sts=0 expandtab
 
 " fuzzy file search
@@ -97,9 +138,11 @@ map <c-p> :Buffers <CR>
 :let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'rust': ['rustfmt']}
+let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'rust': ['rustfmt'], 'python': ['flake8']}
+let g:ale_linters = {'go': ['gofmt'], 'python': ['flake8']}
 let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_lint_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:rustfmt_autosave = 1
@@ -142,19 +185,13 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
-set spelllang=en
-set spell
-set spellcapcheck=$a
+" better search ripgrep
+nmap <c-i> :Rg <CR>
 
-" python things
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+set nospell
+" set spelllang=en
+" set spell
+" set spellcapcheck=$a
 
 "python with virtualenv support
 py << EOF
@@ -165,4 +202,23 @@ if 'VIRTUAL_ENV' in os.environ:
   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
   execfile(activate_this, dict(__file__=activate_this))
 EOF
+
+" tmux nonsense
+" Enable true color 启用终端24位色
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" tmux nonsense
+" pasting indent for days fix
+if &term =~ '^tmux'
+  let &t_BE="\<Esc>[?2004h"
+  let &t_BD="\<Esc>[?2004l"
+  let &t_PS="\<Esc>[200~"
+  let &t_PE="\<Esc>[201~"
+endif
+
+" let g:pymode_python = 'python3'
 

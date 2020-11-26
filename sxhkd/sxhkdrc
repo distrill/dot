@@ -6,6 +6,9 @@
 super + Return
 	alacritty
 
+super + shift + h
+	human
+
 # program launcher
 super + @space
 	~/Development/scripts/rofi.sh
