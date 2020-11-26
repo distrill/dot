@@ -38,9 +38,6 @@ Plugin 'airblade/vim-gitgutter'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
-" zoom window
-Plugin 'taylor/vim-zoomwin'
-
 " markdown things
 Plugin 'iamcco/markdown-preview.nvim'
 
@@ -54,6 +51,9 @@ Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'morhetz/gruvbox'
+Plugin 'bluz71/vim-moonfly-colors'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'dim13/smyck.vim'
 
 " rust as
 Plugin 'rust-lang/rust.vim'
@@ -88,6 +88,8 @@ Plugin 'jparise/vim-graphql'
 
 Plugin 'neovimhaskell/haskell-vim'
 
+" zoom or unzoom current window
+Plugin 'taylor/vim-zoomwin'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -98,6 +100,15 @@ filetype plugin indent on    " required
 " make backspace work like in most other programs
 set backspace=indent,eol,start
 
+
+if has("gui_running")
+  syntax on
+  set hlsearch
+  colorscheme hybrid
+  set bs=2
+  set ai
+  set ruler
+endif
 " colors
 syntax on
 " set termguicolors
@@ -120,6 +131,8 @@ map <c-m> :NERDTreeFocus <CR>
 map <C-n> :NERDTreeToggle<CR>
 map <c-k> :NERDTreeFind <CR>
 let g:NERDTreeIgnore = ['^node_modules$']
+map <c-b> :NERDTreeFind <CR>
+nmap <c-b> :NERDTreeFind<CR>
 
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
@@ -146,6 +159,11 @@ let g:ale_lint_on_save = 1
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:rustfmt_autosave = 1
+
+" jump to ale errors
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 
 if !has('gui_running')
   set t_Co=256
@@ -185,13 +203,7 @@ set whichwrap+=<,>,h,l,[,]
 " yank to clipboard
 vmap <c-y> "+y
 
-" better search ripgrep
 nmap <c-i> :Rg <CR>
-
-set nospell
-" set spelllang=en
-" set spell
-" set spellcapcheck=$a
 
 "python with virtualenv support
 py << EOF
@@ -222,3 +234,15 @@ endif
 
 " let g:pymode_python = 'python3'
 
+" fzf rg shortcut
+nmap <c-i> :Rg <CR>
+
+
+" tmux
+set ttymouse=xterm2
+set mouse=a
+if exists('+termguicolors')
+	  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	      set termguicolors
+      endif
