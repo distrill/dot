@@ -17,7 +17,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'scrooloose/nerdtree'
 
 " nerd tree git status
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " fuzzy find
 Plugin 'junegunn/fzf.vim'
@@ -104,8 +104,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " user config
-
-source ~/.vim/coc.vimrc
 
 " make backspace work like in most other programs
 set backspace=indent,eol,start
@@ -244,3 +242,4 @@ set colorcolumn=80
 map ; :call fzf#run({'source': 'fd', 'sink': 'e', 'window': {'width': 0.8, 'height': 0.6}})<CR>
 
 source ~/.vimrc.docker
+source ~/.vimrc.coc

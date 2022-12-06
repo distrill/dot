@@ -1,6 +1,6 @@
 #!/bin/sh
 
-compton &
+picom &
 mopidy &
 ~/Development/scripts/polybar.sh &
 
@@ -27,6 +27,12 @@ xsetroot -cursor_name left_ptr &
 
 # san mateo, ca
 redshift -l 37.547150:-122.314400 &
+
+# fast mouse
+xinput --set-prop 13 'libinput Accel Speed' 0.9
+
+# screenshot
+flameshot &
 
 export QT_AUTO_SCREEN_SCALE_FACTOR=2
 export GDK_SCALE=2

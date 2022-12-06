@@ -142,7 +142,7 @@ super + {Left,Down,Up,Right}
 
 # escrotum
 ctrl + shift + m
-	gscreenshot-cli -sc
+	flameshot gui
 
 ctrl + shift + h
 	~/Development/scripts/toggle_sound_device 
