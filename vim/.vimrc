@@ -38,22 +38,8 @@ Plugin 'airblade/vim-gitgutter'
 " search file contents
 Plugin 'mileszs/ack.vim'
 
-" markdown things
-Plugin 'iamcco/markdown-preview.nvim'
-
 "colors theme
-Plugin 'ayu-theme/ayu-vim'
-Plugin 'larsbs/vimterial_dark'
-Plugin 'dsolstad/vim-wombat256i'
-Plugin 'romainl/Apprentice'
-Plugin 'jdsimcoe/abstract.vim'
-Plugin 'challenger-deep-theme/vim', {'name': 'challenger-deep-theme'}
-Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'morhetz/gruvbox'
-Plugin 'bluz71/vim-moonfly-colors'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'dim13/smyck.vim'
+Plugin 'chriskempson/base16-vim'
 
 " rust as
 Plugin 'rust-lang/rust.vim'
@@ -91,14 +77,6 @@ Plugin 'ekalinin/Dockerfile.vim'
 " graphql
 Plugin 'jparise/vim-graphql'
 
-" whatever haskell
-Plugin 'neovimhaskell/haskell-vim'
-
-" zoom or unzoom current window
-Plugin 'taylor/vim-zoomwin'
-
-Plugin 'sevko/vim-nand2tetris-syntax'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -111,7 +89,7 @@ set backspace=indent,eol,start
 if has("gui_running")
   syntax on
   set hlsearch
-  colorscheme stellarized
+  colorscheme base16-tomorrow-night
   set bs=2
   set ai
   set ruler
@@ -121,7 +99,7 @@ syntax on
 " set termguicolors
 " let ayucolor="mirage"
 set background=dark
-colorscheme stellarized
+colorscheme base16-tomorrow-night
 let g:hybrid_custom_term_colors = 1
 
 " all the mouse support
@@ -157,7 +135,7 @@ map <c-p> :Buffers <CR>
 :let $FZF_DEFAULT_COMMAND  = 'find . -type f ! -path "*/node_modules/*" -type f ! -path "*/.git/*" -type f ! -path "*/.pg_data/*"'
 
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = {'javascript': ['prettier', 'eslint'], 'typescript': ['prettier'], 'rust': ['rustfmt'], 'python': ['flake8']}
+let g:ale_fixers = {'javascript': ['prettier', 'eslint'], 'typescript': ['prettier'], 'rust': ['rustfmt'], 'python': ['flake8']}
 let g:ale_linters = {'go': ['gofmt'], 'python': ['flake8']}
 " let g:ale_javascript_prettier_options = '--trailing-comma es5 --single-quote true --print-width 100'
 let g:ale_fix_on_save = 1
@@ -230,7 +208,7 @@ if &term =~ '^tmux'
   let &t_PE="\<Esc>[201~"
 endif
 
-" fzf rg shortcut
+" rg shortcut
 nmap <c-i> :Rg <CR>
 
 " highlight error
@@ -238,8 +216,6 @@ highlight ALEError ctermbg=none cterm=underline
 
 " max width line
 set colorcolumn=80
-
-map ; :call fzf#run({'source': 'fd', 'sink': 'e', 'window': {'width': 0.8, 'height': 0.6}})<CR>
 
 source ~/.vimrc.docker
 source ~/.vimrc.coc
