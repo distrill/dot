@@ -76,5 +76,13 @@ return require('packer').startup(function(use)
   use 'ray-x/go.nvim'
   use 'ray-x/guihua.lua' -- recommanded if need floating window support
   use 'neovim/nvim-lspconfig'
-  use 'nvim-treesitter/nvim-treesitter'
+
+  -- error / diagnostic problems
+  use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {}
+  end
+}
 end)
