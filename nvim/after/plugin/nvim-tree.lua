@@ -25,6 +25,6 @@ require("nvim-tree").setup({
 })
 
 vim.keymap.set("n", "<C-n>", vim.cmd.NvimTreeToggle)
-vim.keymap.set("n", "<C-b>", vim.cmd.NvimTreeFindFile)
+vim.keymap.set("n", "<leader>b", vim.cmd.NvimTreeFindFile)
 vim.keymap.set("n", "<C-m>", vim.cmd.NvimTreeFocus)
 
