@@ -7,8 +7,11 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- lsp as
-  use('neovim/nvim-lspconfig')
+  -- colorscheme
+  use {
+    "catppuccin/nvim",
+    as = "catppuccin",
+  }
 
   -- fuzzy file search
   use {
@@ -16,34 +19,27 @@ return require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
-  -- colorscheme
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-      vim.cmd('colorscheme rose-pine')
-    end
-  })
+  -- quickfix
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
 
   -- better syntax highlighting
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-
-  -- quick switch files
-  use('ThePrimeagen/harpoon')
 
   -- like nerdtree
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      'nvim-tree/nvim-web-devicons',
     },
-    tag = 'nightly'                  -- optional, updated every week. (see issue #1193)
+    tag = 'nightly'
   }
 
   -- undo tree
   use('mbbill/undotree')
 
-  -- auto complete etc
+  -- lsp, auto complete etc
+  use('neovim/nvim-lspconfig')
+  use('jose-elias-alvarez/null-ls.nvim')
   use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -69,13 +65,6 @@ return require('packer').startup(function(use)
   -- toggle comments
   use('tomtom/tcomment_vim')
 
-  -- prettier
-  use('jose-elias-alvarez/null-ls.nvim')
-  use('MunifTanjim/prettier.nvim')
-
-  -- golang
-  use 'ray-x/go.nvim'
-  use 'ray-x/guihua.lua' -- recommanded if need floating window support
 
   -- error / diagnostic problems
   use {
@@ -85,9 +74,15 @@ return require('packer').startup(function(use)
       require("trouble").setup {}
     end
   }
+
+  -- js etc
+  use('MunifTanjim/prettier.nvim')
+
+  -- golang
+  use 'ray-x/go.nvim'
+  use 'ray-x/guihua.lua' -- recommanded if need floating window support
+
+  -- rust
   use('timonv/vim-cargo')
-
   use('p00f/clangd_extensions.nvim')
-
-  use { "catppuccin/nvim", as = "catppuccin" }
 end)

@@ -1,15 +1,11 @@
-require('telescope').setup{
-	defaults = {
-		file_ignore_patterns = { "node_modules" }
-	}
+require('telescope').setup {
+  defaults = {
+    file_ignore_patterns = { "node_modules" }
+  }
 }
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>;', builtin.find_files, {})
-vim.keymap.set('n', '<C-p>', builtin.buffers, {})
-vim.keymap.set('n', '<leader>i', function()
-	builtin.grep_string({ search = "" })
-end)
-vim.keymap.set('n', '<C-i>', function()
-	builtin.grep_string({ search = vim.fn.input("Grep > ") })
-end)
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<leader>;', telescope.find_files, {})
+vim.keymap.set('n', '<C-p>', telescope.buffers, {})
+vim.keymap.set('n', '<leader>i', telescope.grep_string, {})
+vim.keymap.set('n', '<C-i>', telescope.live_grep, {})
