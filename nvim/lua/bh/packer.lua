@@ -6,6 +6,7 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'jay-babu/mason-null-ls.nvim'
 
   -- colorscheme
   use {
@@ -17,6 +18,10 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = { { 'nvim-lua/plenary.nvim' } }
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim'
   }
 
   -- quickfix
@@ -63,8 +68,7 @@ return require('packer').startup(function(use)
   }
 
   -- toggle comments
-  use('tomtom/tcomment_vim')
-
+  use('numToStr/Comment.nvim')
 
   -- error / diagnostic problems
   use {
@@ -75,8 +79,12 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- notifications
+  use 'rcarriga/nvim-notify'
+
   -- js etc
   use('MunifTanjim/prettier.nvim')
+  use('dmmulroy/tsc.nvim')
 
   -- golang
   use 'ray-x/go.nvim'
