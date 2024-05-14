@@ -32,3 +32,7 @@ alias spc="sudo pacman -Rns $(pacman -Qdtq)"
 alias spu="yay -U"
 
 alias vim="nvim"
+
+# sourcing bits
+# node version manager
+source /usr/share/nvm/init-nvm.sh

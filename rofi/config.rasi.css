@@ -1,0 +1,86 @@
+* {
+  white: #ffffff;
+  light-gray: #bac2de;
+  dark-blue: #1e1e2e;
+  green: #a6e3a1;
+  blue: #89b4fa;
+  yellow: #f9e2af;
+  cyan: #94e2d5;
+
+  window-border-color: var(light-gray);
+  bright-text-color: var(green);
+  mellow-text-color: var(light-gray);
+  main-background-color: var(dark-blue);
+}
+
+window {
+  background-color: var(main-background-color);
+  padding: 40px;
+  border-radius: 5px;
+  border-color: var(window-border-color);
+  border: 2px;
+}
+
+entry {
+  text-color: var(mellow-text-color);
+  background-color: var(main-background-color);
+  placeholder: ">>";
+  cursor: pointer;
+}
+
+prompt {
+  text-color: var(mellow-text-color);
+}
+
+listview {
+  lines: 3;
+  scrollbar: false;
+}
+
+element {
+  padding: 20px;
+  background-color: var(main-background-color);
+}
+element selected {
+  text-color: var(bright-text-color);
+}
+element normal.normal {
+  background-color: var(main-background-color);
+}
+element alternate.normal {
+  background-color: var(main-background-color);
+}
+element selected.active {
+  text-color: var(bright-text-color);
+  background-color: var(main-background-color);
+}
+element normal.active {
+  background-color: var(main-background-color);
+}
+element alternate.active {
+  background-color: var(main-background-color);
+}
+element selected.normal {
+  text-color: var(bright-text-color);
+  background-color: var(main-background-color);
+}
+element-text {
+  text-color: var(mellow-text-color);
+  background-color: var(main-background-color);
+}
+
+element-text selected.normal {
+  text-color: var(bright-text-color);
+}
+
+configuration {
+  font: "Fira Code Light 24";
+  timeout {
+    action: "kb-cancel";
+    delay: 0;
+  }
+  filebrowser {
+    directories-first: true;
+    sorting-method: "name";
+  }
+}
