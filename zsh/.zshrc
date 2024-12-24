@@ -24,15 +24,33 @@ export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export EDITOR='vim'
 
 
+# getting around
 alias ls="exa -F"
 
+# package management
 alias sps="yay -S"
 alias spr="yay -R"
 alias spc="sudo pacman -Rns $(pacman -Qdtq)"
-alias spu="yay -U"
+alias spa="yay -U"
+alias spu="yay -Syu"
 
+# editorrrrrrrrrrr
 alias vim="nvim"
+
+# ssh
+alias ssh="kitten ssh"
+
+# language specific
+alias clj="clojure"
+alias cljdep="echo '{:deps\n  {clojure.java-time/clojure.java-time {:mvn/version \"1.1.0\"}}}' > deps.edn"
+
+# tailing logs through pino pretty
+prettylog() {
+  tail -n 100 -f "$1" | grep --line-buffered "$2" | npx pino-pretty --levelFirst --translateTime "yyyy/mm/dd | HH:MM:ss"
+}
 
 # sourcing bits
 # node version manager
 source /usr/share/nvm/init-nvm.sh
+
+

@@ -1,10 +1,13 @@
-#! /bin/sh
+#! /bin/bash
 
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor DP-0   -d     
-bspc monitor HDMI-0 -d     
+right="DP-0"
+left="DP-2"
+
+bspc monitor $left  -d     
+bspc monitor $right -d     
 
 bspc config border_width         	2
 bspc config window_gap          	32

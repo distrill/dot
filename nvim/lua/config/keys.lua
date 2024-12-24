@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- move selected lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -38,8 +40,8 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- toggle highlight searched text
 vim.keymap.set("n", "<C-h>", "<cmd>set hlsearch! <CR>")
 
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
-  if ls.choice_active() then
-    ls.change_choice(1)
-  end
-end, { silent = true })
+-- reload all buffers
+vim.keymap.set("n", "<leader>b", "<cmd>bufdo e<CR>")
+
+-- search for visually selected text
+vim.api.nvim_set_keymap('v', '//', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], { noremap = true })

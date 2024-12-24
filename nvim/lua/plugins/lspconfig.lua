@@ -9,12 +9,6 @@ return {
         "williamboman/mason-lspconfig.nvim",
       },
       {
-        "hrsh7th/nvim-cmp",
-      },
-      {
-        "hrsh7th/cmp-nvim-lsp",
-      },
-      {
         "L3MON4D3/LuaSnip",
         config = function()
           local ls = require 'luasnip'
@@ -24,7 +18,8 @@ return {
         end,
       },
     },
-    config = function()
+    config = function(opts)
+      local lspconfig = require('lspconfig')
       vim.api.nvim_create_autocmd('LspAttach', {
         desc = 'LSP actions',
         callback = function(event)
@@ -77,56 +72,56 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
-        callback = function()
-          vim.diagnostic.open_float(nil, {
-            focusable = false,
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = 'rounded',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-          })
+      -- Show diagnostics in a pop-up window on hover
+      _G.LspDiagnosticsPopupHandler = function()
+        local current_cursor = vim.api.nvim_win_get_cursor(0)
+        local last_popup_cursor = vim.w.lsp_diagnostics_last_cursor or { nil, nil }
+
+        -- Show the popup diagnostics window,
+        -- but only once for the current cursor location (unless moved afterwards).
+        if not (current_cursor[1] == last_popup_cursor[1] and current_cursor[2] == last_popup_cursor[2]) then
+          vim.w.lsp_diagnostics_last_cursor = current_cursor
+          vim.diagnostic.open_float(0, { scope = "cursor" }) -- for neovim 0.6.0+, replaces show_{line,position}_diagnostics
         end
-      })
+      end
+      vim.cmd [[
+        augroup LSPDiagnosticsOnHover
+          autocmd!
+          autocmd CursorHold *   lua _G.LspDiagnosticsPopupHandler()
+        augroup END
+        ]]
+      -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      --   group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
+      --   callback = function()
+      --     vim.diagnostic.open_float(nil, {
+      --       focusable = false,
+      --       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      --       border = 'rounded',
+      --       source = 'always',
+      --       prefix = ' ',
+      --       scope = 'cursor',
+      --     })
+      --   end
+      -- })
 
 
-      local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
       local default_setup = function(server)
+        local capabilities = require('blink.cmp').get_lsp_capabilities()
         require('lspconfig')[server].setup({
-          capabilities = lsp_capabilities,
+          capabilities = capabilities,
         })
       end
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "tsserver", "gopls" },
+        ensure_installed = { "lua_ls", "gopls", "eslint" },
         handlers = {
           default_setup,
         },
       })
 
-      local cmp = require('cmp')
-      cmp.setup({
-        sources = {
-          { name = 'nvim_lsp' },
-        },
-        mapping = cmp.mapping.preset.insert({
-          -- Enter key confirms completion item
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
-          -- Ctrl + space triggers completion menu
-          ['<C-Space>'] = cmp.mapping.complete(),
-        }),
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-      })
-
       -- undefined global "vim"
-      require("lspconfig")['lua_ls'].setup({
+      lspconfig['lua_ls'].setup({
         settings = {
           Lua = {
             diagnostics = {
@@ -134,6 +129,44 @@ return {
             }
           }
         }
+      })
+
+      lspconfig.typos_lsp.setup({
+        -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
+        cmd_env = { RUST_LOG = "error" },
+        init_options = {
+          diagnosticSeverity = "Error"
+        }
+      })
+
+      lspconfig.clangd.setup {
+        cmd = { "clangd", "--compile-commands-dir=build", "--log=verbose" },
+        on_attach = function(client)
+          vim.cmd 'setlocal omnifunc=v:lua.vim.lsp.omnifunc'
+        end,
+        handlers = {
+          ["textDocument/publishDiagnostics"] = vim.lsp.with(
+            vim.lsp.diagnostic.on_publish_diagnostics, {
+              virtual_text = false,
+              signs = true,
+              update_in_insert = false,
+            }
+          ),
+        },
+        init_options = {
+          clangdFileStatus = true,
+        },
+        settings = {
+          clangd = {
+            includePath = { "/home/bh/dev/bhlash/vendor/raylib/src" },
+          },
+        },
+      }
+
+      lspconfig.clojure_lsp.setup({
+        cmd = { "clojure-lsp" },
+        filetypes = { "clojure", "edn" },
+        root_dir = lspconfig.util.root_pattern("deps.edn", "project.clj", ".git"),
       })
     end,
   },

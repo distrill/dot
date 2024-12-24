@@ -131,3 +131,26 @@ ctrl + shift + l
 
 ctrl + shift + m
   flameshot gui
+
+# german babyyyyyyyyyyyyyyy
+alt + a
+    xdotool type --delay 0 "ä"
+
+alt + o
+    xdotool type --delay 0 "ö"
+
+alt + u
+    xdotool type --delay 0 "ü"
+
+alt + s
+    xdotool type --delay 0 "ß"
+
+# Bind Alt + Shift + a/o/u to type Ä/Ö/Ü
+alt + shift + a
+    xdotool type --delay 0 "Ä"
+
+alt + shift + o
+    xdotool type --delay 0 "Ö"
+
+alt + shift + u
+    xdotool type --delay 0 "Ü"
