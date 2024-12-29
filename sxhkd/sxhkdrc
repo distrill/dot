@@ -132,6 +132,12 @@ ctrl + shift + l
 ctrl + shift + m
   flameshot gui
 
+alt + p
+    xdotool key alt+Left
+
+alt + n
+    xdotool key alt+Right
+
 # german babyyyyyyyyyyyyyyy
 alt + a
     xdotool type --delay 0 "ä"
@@ -154,3 +160,11 @@ alt + shift + o
 
 alt + shift + u
     xdotool type --delay 0 "Ü"
+
+# keyboard
+XF86MonBrightnessUp
+  brightnessctl set 5%+
+
+XF86MonBrightnessDown
+  brightnessctl set 5%-
+

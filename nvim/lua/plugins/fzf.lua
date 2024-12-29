@@ -3,19 +3,33 @@ return {
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    local path = require('fzf-lua').path
+
     require("fzf-lua").setup({
-      header = false,
-      winopts = {
+      header     = false,
+      fzf_colors = {
+        ["gutter"] = "-1",
+        ["pointer"] = { "fg", "Normal" },
+        -- ["border"] = { "fg", "Normal" },
+      },
+      hls        = {
+        border = "Normal",
+      },
+      winopts    = {
+        border = 'rounded',
         preview = {
           layout = "horizontal",
-        }
+        },
       },
       previewers = {
         builtin = {
-          treesitter = { enable = true }
+          treesitter = { enabled = true }
         }
       },
-      keymap = {
+      oldfiles   = {
+        include_current_session = true,
+      },
+      keymap     = {
         builtin = {
           ['<C-u>'] = 'preview-page-up',
           ['<C-d>'] = 'preview-page-down',
@@ -27,10 +41,10 @@ return {
       }
     })
 
-    -- view files in current directory sorted by recently opened
+    local desc = "FZF view files in current directory sorted by recently opened"
     vim.keymap.set(
       'n',
-      '<leader>;',
+      '<leader>p',
       function()
         require('fzf-lua').oldfiles({
           cwd = vim.loop.cwd(),
@@ -42,15 +56,16 @@ return {
     -- view files in current directory
     vim.keymap.set(
       'n',
-      '<leader>:',
+      '<leader>;',
       function()
         require('fzf-lua').files({
           header = false
         })
       end,
-      { noremap = true, silent = true })
+      { desc = desc, noremap = true, silent = true }
+    )
 
-    -- grep file contents
+    desc = "FZF grep file contents"
     vim.keymap.set(
       'n',
       '<leader>i',
@@ -60,9 +75,10 @@ return {
           header = false,
         })
       end,
-      { noremap = true, silent = true })
+      { desc = desc, noremap = true, silent = true }
+    )
 
-    -- diagnostics in the current buffer
+    desc = "FZF diagnostics in the current buffer"
     vim.keymap.set(
       'n',
       '<leader>t',
@@ -70,9 +86,10 @@ return {
         require('fzf-lua').diagnostics_document({
         })
       end,
-      { noremap = true, silent = true })
+      { desc = desc, noremap = true, silent = true }
+    )
 
-    -- diagnostics in the current workspace
+    desc = "FZF diagnostics in the current workspace"
     vim.keymap.set(
       'n',
       '<leader>T',
@@ -80,8 +97,13 @@ return {
         require('fzf-lua').diagnostics_workspace({
         })
       end,
-      { noremap = true, silent = true })
+      {
+        desc = desc,
+        noremap = true,
+        silent = true,
+      })
 
+    desc = "FZF git files and diffs"
     vim.keymap.set(
       'n',
       '<leader>g',
@@ -90,6 +112,38 @@ return {
           -- previewer = 'builtin',
         })
       end,
-      { noremap = true, silent = true })
+      { desc = desc, noremap = true, silent = true }
+    )
+
+    desc = "FZF find file and open parent in Oil"
+    vim.keymap.set(
+      "n",
+      "<leader>v",
+      function()
+        require('fzf-lua').files({
+          header = false,
+          actions = {
+            ["default"] = function(allselected)
+              -- Ensure we have a valid selection
+              local selected = path.entry_to_file(allselected[1]).path
+              if not selected or selected == "" then
+                return
+              end
+
+
+              -- Get the parent directory of the selected file
+              local file_path = vim.fn.fnamemodify(selected, ":p:h")
+              file_path = vim.fn.simplify(file_path)
+              file_path = vim.fn.fnameescape(file_path)
+
+              -- Open the parent directory in oil.nvim
+              -- use vim cmd to get configured oil instance
+              vim.cmd("Oil --float " .. file_path)
+            end,
+          },
+        })
+      end,
+      { desc = desc, noremap = true, silent = true }
+    )
   end
 }

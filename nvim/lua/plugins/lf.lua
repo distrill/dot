@@ -1,0 +1,42 @@
+return {
+  -- -- "akinsho/toggleterm.nvim",
+  -- -- config = function()
+  -- --   require("toggleterm").setup({
+  -- --     size = 20,                -- Default size for terminals
+  -- --     open_mapping = [[<c-\>]], -- Keybinding to toggle terminal
+  -- --     direction = "float",      -- Use floating windows for terminals
+  -- --     float_opts = {
+  -- --       border = "curved",      -- Choose border type: single, double, etc.
+  -- --     },
+  -- --   })
+  -- -- end
+  -- --
+  -- --
+  -- "lmburns/lf.nvim",
+  -- config = function()
+  --   vim.env.TERM = 'xterm-kitty'
+  --
+  --   -- This feature will not work if the plugin is lazy-loaded
+  --   vim.g.lf_netrw = 1
+  --
+  --   require('toggleterm').setup({
+  --     shade_terminals = false,
+  --   })
+  --
+  --   require("lf").setup({
+  --     border = "rounded",
+  --     term_cmd = "toggleterm",
+  --   })
+  --
+  --   vim.keymap.set("n", "<leader>f", "<Cmd>Lf<CR>")
+  --
+  --   vim.api.nvim_create_autocmd('User', {
+  --     pattern = "LfTermEnter",
+  --     callback = function(a)
+  --       vim.api.nvim_buf_set_keymap(a.buf, "t", "q", "q", { nowait = true })
+  --       vim.api.nvim_buf_set_keymap(a.buf, "t", "<esc>", "q", { nowait = true })
+  --     end,
+  --   })
+  -- end,
+  -- dependencies = { "akinsho/toggleterm.nvim" }
+}

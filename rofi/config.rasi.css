@@ -41,9 +41,6 @@ element {
   padding: 20px;
   background-color: var(main-background-color);
 }
-element selected normal normal-selected {
-  text-color: var(bright-text-color);
-}
 element selected {
   text-color: var(bright-text-color);
 }
@@ -77,7 +74,7 @@ element-text selected.normal {
 }
 
 configuration {
-  font: "Fira Code Light 16";
+  font: "Fira Code Light 12";
   timeout {
     action: "kb-cancel";
     delay: 0;

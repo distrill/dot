@@ -43,5 +43,11 @@ vim.keymap.set("n", "<C-h>", "<cmd>set hlsearch! <CR>")
 -- reload all buffers
 vim.keymap.set("n", "<leader>b", "<cmd>bufdo e<CR>")
 
--- search for visually selected text
 vim.api.nvim_set_keymap('v', '//', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], { noremap = true })
+
+-- vim.keymap.set({ "i", "s" }, "<C-E>", function()
+--   local ls = require("luasnip")
+--   if ls.choice_active() then
+--     ls.change_choice(1)
+--   end
+-- end, { silent = true })

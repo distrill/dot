@@ -37,4 +37,14 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
+
+-- set status line to be global, spanning the entire width of the terminal window
+vim.opt.laststatus = 3
+
+
+-- no background colors on floating window borders
+vim.cmd([[
+  hi NormalFloat guibg=NONE
+  hi FloatBorder guibg=NONE
+]])

@@ -17,11 +17,12 @@ source $ZSH/oh-my-zsh.sh
 
 # plugins are in ~/.oh-my-zsh/plugins/*
 # custom plugins in ~/.oh-my-zsh/custom/plugins/
-plugins=(git docker zsh-autosuggestions)
+# plugins=(git docker zsh-autosuggestions)
 
 
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export EDITOR='vim'
+export EDITOR='nvim'
+export GOPATH="/home/bh/Downloads/bin/go"
 
 
 # getting around
@@ -49,8 +50,5 @@ prettylog() {
   tail -n 100 -f "$1" | grep --line-buffered "$2" | npx pino-pretty --levelFirst --translateTime "yyyy/mm/dd | HH:MM:ss"
 }
 
-# sourcing bits
-# node version manager
-source /usr/share/nvm/init-nvm.sh
-
-
+# nvm takes too god damn long to init so we do it on demand only
+alias nvmi="source /usr/share/nvm/init-nvm.sh"

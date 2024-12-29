@@ -1,11 +1,14 @@
 return {
-  {
-    "catppuccin/nvim",
-    config = function()
-      color = color or "catppuccin-mocha"
-      vim.cmd.colorscheme(color)
-      vim.o.termguicolors = true
-      vim.o.background = "dark"
-    end
-  }
+  "catppuccin/nvim",
+  config = function()
+    require("catppuccin").setup({
+      transparent_background = true,
+      integrations = {
+        fzf = true, -- Enable Catppuccin for fzf-lua
+      }
+    })
+    vim.cmd.colorscheme("catppuccin-frappe")
+    vim.o.termguicolors = true
+    vim.o.background = "dark"
+  end
 }

@@ -26,7 +26,12 @@ return {
           local opts = { buffer = event.buf }
 
           -- these keybindings only work if you have an active language server
-          vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+          vim.keymap.set('n', 'K', function()
+            -- Close any open floating diagnostic windows
+            vim.api.nvim_command('silent! lua vim.lsp.util.close_floating_preview()')
+            -- Show hover information
+            vim.lsp.buf.hover()
+          end, opts)
           vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
           vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
           vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
@@ -72,7 +77,7 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-      -- Show diagnostics in a pop-up window on hover
+
       _G.LspDiagnosticsPopupHandler = function()
         local current_cursor = vim.api.nvim_win_get_cursor(0)
         local last_popup_cursor = vim.w.lsp_diagnostics_last_cursor or { nil, nil }
@@ -90,19 +95,6 @@ return {
           autocmd CursorHold *   lua _G.LspDiagnosticsPopupHandler()
         augroup END
         ]]
-      -- vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      --   group = vim.api.nvim_create_augroup("float_diagnostic_cursor", { clear = true }),
-      --   callback = function()
-      --     vim.diagnostic.open_float(nil, {
-      --       focusable = false,
-      --       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-      --       border = 'rounded',
-      --       source = 'always',
-      --       prefix = ' ',
-      --       scope = 'cursor',
-      --     })
-      --   end
-      -- })
 
 
       local default_setup = function(server)
@@ -112,9 +104,21 @@ return {
         })
       end
 
-      require('mason').setup({})
+      local ensure_installed = {
+        'eslint-lsp',
+        'gopls',
+        'lua-language-server',
+        'prettier',
+        'typescript-language-server',
+      }
+      require('mason').setup({
+        ensure_installed = ensure_installed,
+        ui = {
+          border = 'rounded',
+        },
+      })
       require('mason-lspconfig').setup({
-        ensure_installed = { "lua_ls", "gopls", "eslint" },
+        ensure_installed = ensure_installed,
         handlers = {
           default_setup,
         },
@@ -124,11 +128,24 @@ return {
       lspconfig['lua_ls'].setup({
         settings = {
           Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files and plugins
+              library = {
+                vim.api.nvim_get_runtime_file("", true),
+              },
+              checkThirdParty = false, -- Avoid warnings about unknown third-party libraries
+            },
             diagnostics = {
-              globals = { 'vim' }
-            }
-          }
-        }
+              globals = { "vim" }, -- Add globals like `vim`
+            },
+            telemetry = {
+              enable = false, -- Disable telemetry to speed things up
+            },
+          },
+        },
       })
 
       lspconfig.typos_lsp.setup({
