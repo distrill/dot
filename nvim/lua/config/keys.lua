@@ -1,5 +1,9 @@
 vim.g.mapleader = " "
 
+-- move selected lines
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
 -- append next line to this but keep cursor at start
 vim.keymap.set("n", "J", "mzJ`z")
 -- keep curor middle of screen when page up page down
