@@ -1,9 +1,5 @@
 vim.g.mapleader = " "
 
--- move selected lines
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 -- append next line to this but keep cursor at start
 vim.keymap.set("n", "J", "mzJ`z")
 -- keep curor middle of screen when page up page down
@@ -25,12 +21,6 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
--- quickfix list navigation
-vim.keymap.set("n", "<C-K>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-J>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>K", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>J", "<cmd>lprev<CR>zz")
-
 -- sed selected word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
@@ -43,11 +33,13 @@ vim.keymap.set("n", "<C-h>", "<cmd>set hlsearch! <CR>")
 -- reload all buffers
 vim.keymap.set("n", "<leader>b", "<cmd>bufdo e<CR>")
 
+-- search for selected text
 vim.api.nvim_set_keymap('v', '//', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], { noremap = true })
 
--- vim.keymap.set({ "i", "s" }, "<C-E>", function()
---   local ls = require("luasnip")
---   if ls.choice_active() then
---     ls.change_choice(1)
---   end
--- end, { silent = true })
+-- navigate diagnostics
+vim.keymap.set("n", "<leader>]", function()
+  vim.diagnostic.goto_next({ float = false })
+end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>[", function()
+  vim.diagnostic.goto_prev({ float = false })
+end, { noremap = true, silent = true })

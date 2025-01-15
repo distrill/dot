@@ -25,13 +25,6 @@ return {
         callback = function(event)
           local opts = { buffer = event.buf }
 
-          -- these keybindings only work if you have an active language server
-          vim.keymap.set('n', 'K', function()
-            -- Close any open floating diagnostic windows
-            vim.api.nvim_command('silent! lua vim.lsp.util.close_floating_preview()')
-            -- Show hover information
-            vim.lsp.buf.hover()
-          end, opts)
           vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
           vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
           vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
@@ -44,18 +37,15 @@ return {
         end
       })
 
-      -- better looking hover
-      vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
-      vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
       local border = {
-        { "🭽", "FloatBorder" },
-        { "▔", "FloatBorder" },
-        { "🭾", "FloatBorder" },
-        { "▕", "FloatBorder" },
-        { "🭿", "FloatBorder" },
-        { "▁", "FloatBorder" },
-        { "🭼", "FloatBorder" },
-        { "▏", "FloatBorder" },
+        { "╭", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╮", "FloatBorder" },
+        { "│", "FloatBorder" },
+        { "╯", "FloatBorder" },
+        { "─", "FloatBorder" },
+        { "╰", "FloatBorder" },
+        { "│", "FloatBorder" },
       }
       local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
       function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -64,8 +54,17 @@ return {
         return orig_util_open_floating_preview(contents, syntax, opts, ...)
       end
 
+      local ensure_installed = {
+        'eslint-lsp',
+        'gopls',
+        'lua-language-server',
+        'prettier',
+        'typescript-language-server',
+      }
+
       -- diagnostics
       vim.diagnostic.config({
+        ensure_installed = ensure_installed,
         virtual_text = true,
         signs = true,
         underline = true,
@@ -73,10 +72,17 @@ return {
         severity_sort = false,
       })
       local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
+      vim.diagnostic.config({
+        signs = {
+          severity = {
+            { name = "DiagnosticSignError", text = signs.Error }, -- Replace "E" with your desired icon for Error
+            { name = "DiagnosticSignWarn",  text = signs.Warn },  -- Replace "W" with your desired icon for Warn
+            { name = "DiagnosticSignInfo",  text = signs.Info },  -- Replace "I" with your desired icon for Info
+            { name = "DiagnosticSignHint",  text = signs.Hint },  -- Replace "H" with your desired icon for Hint
+          }
+        }
+      })
+
 
       _G.LspDiagnosticsPopupHandler = function()
         local current_cursor = vim.api.nvim_win_get_cursor(0)
@@ -104,13 +110,6 @@ return {
         })
       end
 
-      local ensure_installed = {
-        'eslint-lsp',
-        'gopls',
-        'lua-language-server',
-        'prettier',
-        'typescript-language-server',
-      }
       require('mason').setup({
         ensure_installed = ensure_installed,
         ui = {
@@ -118,7 +117,6 @@ return {
         },
       })
       require('mason-lspconfig').setup({
-        ensure_installed = ensure_installed,
         handlers = {
           default_setup,
         },

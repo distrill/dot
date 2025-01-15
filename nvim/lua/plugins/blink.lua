@@ -15,7 +15,7 @@ return {
     completion = {
       list = {
         -- don't insert selection until manual trigger
-        selection = "manual",
+        selection = { preselect = false, auto_insert = false },
       },
       menu = {
         border = "rounded",
