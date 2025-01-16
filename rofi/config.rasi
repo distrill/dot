@@ -77,7 +77,7 @@ element-text selected.normal {
 }
 
 configuration {
-  font: "Fira Code Light 16";
+  font: "Fira Code Light 24";
   timeout {
     action: "kb-cancel";
     delay: 0;

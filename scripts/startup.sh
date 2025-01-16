@@ -4,6 +4,9 @@
 # mouse cursor should not be an x
 xsetroot -cursor_name left_ptr &
 
+# fix oversized cursor
+gsettings set org.gnome.desktop.interface cursor-size 16 &
+
 # global vim keyboard
 setxkbmap -option custom_arrows:custom
 

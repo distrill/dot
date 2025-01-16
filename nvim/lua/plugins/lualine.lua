@@ -18,11 +18,14 @@ return {
         a = { fg = colors.white, bg = colors.grey },
         b = { fg = colors.white, bg = colors.grey },
         c = { fg = colors.black, bg = colors.black },
-        z = { fg = colors.white, bg = colors.black },
+        z = { fg = colors.white, bg = colors.grey },
       },
       insert = { a = { fg = colors.black, bg = colors.light_green } },
       visual = { a = { fg = colors.black, bg = colors.orange } },
       replace = { a = { fg = colors.black, bg = colors.green } },
+      inactive = {
+        b = { fg = colors.grey, bg = colors.black },
+      },
     }
 
     local empty = require('lualine.component'):extend()
@@ -123,6 +126,9 @@ return {
         lualine_z = { '%l:%c', '%p%%/%L' },
       },
       inactive_sections = {
+        lualine_b = {
+          { 'filename', file_status = false, path = 1 },
+        },
         lualine_c = { '%f %y %m' },
         lualine_x = {},
       },
