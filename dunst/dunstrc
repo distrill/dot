@@ -122,19 +122,19 @@
 
 
 [urgency_low]
-    background = "#1E1E2E"
-    foreground = "#CDD6F4"
-    frame_color ="#CDD6F4"
+    background = "#111827"
+    foreground = "#DDD6FE"
+    frame_color ="#99BBBD"
     timeout = 10
 
 [urgency_normal]
-    background = "#1E1E2E"
-    foreground = "#CDD6F4"
-    frame_color = "#BAC2DE"
+    background = "#111827"
+    foreground = "#DDD6FE"
+    frame_color = "#99BBBD"
     timeout = 10
 
 [urgency_critical]
-    background = "#1E1E2E"
-    foreground = "#CDD6F4"
-    frame_color = "#F38BA8"
+    background = "#111827"
+    foreground = "#DDD6FE"
+    frame_color = "#99BBBD"
     timeout = 10

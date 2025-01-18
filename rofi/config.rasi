@@ -1,16 +1,31 @@
 * {
   white: #ffffff;
-  light-gray: #bac2de;
-  dark-blue: #1e1e2e;
-  green: #a6e3a1;
-  blue: #89b4fa;
-  yellow: #f9e2af;
-  cyan: #94e2d5;
+  light-gray: #6B7280; // tundra
+  dark-blue: #111827; // tundra
+  green: #98BC99; // tundra
+  blue: #A5B4FC; // tundra
+  yellow: #E8D4B0; // tundra
+  cyan: #99BBBD; // tundra
+  violet: #DDD6FE; // tundra
 
-  window-border-color: var(light-gray);
-  bright-text-color: var(green);
+  window-border-color: var(cyan);
+  bright-text-color: var(violet);
   mellow-text-color: var(light-gray);
   main-background-color: var(dark-blue);
+
+  separatorcolor: var(dark-blue);
+}
+
+message {
+    border: none;
+}
+
+listview {
+    border: none;
+}
+
+sidebar {
+    border: none;
 }
 
 window {
@@ -24,12 +39,13 @@ window {
 entry {
   text-color: var(mellow-text-color);
   background-color: var(main-background-color);
-  placeholder: ">>";
+  placeholder: ">";
   cursor: pointer;
 }
 
 prompt {
   text-color: var(mellow-text-color);
+  underline: none;
 }
 
 listview {
@@ -77,7 +93,7 @@ element-text selected.normal {
 }
 
 configuration {
-  font: "Fira Code Light 24";
+  font: "Fira Code Light 16";
   timeout {
     action: "kb-cancel";
     delay: 0;
