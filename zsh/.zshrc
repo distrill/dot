@@ -20,9 +20,9 @@ source $ZSH/oh-my-zsh.sh
 # plugins=(git docker zsh-autosuggestions)
 
 
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export EDITOR='nvim'
 export GOPATH="/home/bh/Downloads/bin/go"
+export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
 
 
 # getting around
