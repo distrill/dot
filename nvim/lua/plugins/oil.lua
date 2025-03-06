@@ -1,22 +1,48 @@
 return {
   'stevearc/oil.nvim',
   ---@module 'oil'
-  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     vim.cmd([[
       hi NormalFloat guibg=NONE
       hi FloatBorder guibg=NONE
     ]])
 
-    local opts = {
+    local oil = require('oil')
+
+    oil.setup({
       keymaps = {
-        -- ["q"] = { "actions.close", mode = "n" },
+        ["<CR>"] = function()
+          local entry = oil.get_cursor_entry()
+          if not entry then
+            return
+          end
+
+          local dir = oil.get_current_dir()
+          local path = vim.fs.joinpath(dir, entry.name)
+
+          if entry.type == "directory" then
+            oil.open(path)
+          elseif entry.type == "file" then
+            oil.close({ exit_if_last_buf = false })
+            local win = require("window-picker").pick_window({
+              filter_rules = {
+                autoselect_one = true,
+                include_current_win = true,
+              },
+            })
+
+            if win then
+              vim.api.nvim_set_current_win(win)
+              vim.cmd.edit(path)
+            end
+          end
+        end,
       },
       float = {
-        padding = 3, -- padding around the float
+        padding = 3,
       }
-    }
-    require('oil').setup(opts)
+    })
     vim.keymap.set("n", "<leader>f", "<Cmd>Oil --float<CR>")
   end
 }

@@ -1,3 +1,27 @@
+local function open_in_selected_window(prompt_bufnr)
+  require("telescope.actions").close(prompt_bufnr)
+
+  local entry = require("telescope.actions.state").get_selected_entry()
+  if not entry then return end
+
+  local winid = require('window-picker').pick_window({
+    hint = 'floating-letter',
+    show_prompt = false,
+    filter_rules = {
+      include_current_win = true,
+      bo = {
+        buftype = { "terminal", "nofile", "quickfix", "prompt" },
+      },
+      ft = { "TelescopePrompt" },
+    },
+  })
+
+  if winid then
+    vim.api.nvim_set_current_win(winid)
+    vim.cmd("edit " .. entry.value)
+  end
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -7,7 +31,15 @@ return {
     config = function()
       require('telescope').setup {
         defaults = {
-          file_ignore_patterns = { "node_modules", "vendor", "build", "dist" }
+          file_ignore_patterns = { "node_modules", "vendor", "build", "dist" },
+          mappings = {
+            i = {
+              ["<CR>"] = open_in_selected_window,
+            },
+            n = {
+              ["<CR>"] = open_in_selected_window,
+            },
+          }
         }
       }
 
