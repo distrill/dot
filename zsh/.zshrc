@@ -45,6 +45,8 @@ alias ssh="kitten ssh"
 alias clj="clojure"
 alias cljdep="echo '{:deps\n  {clojure.java-time/clojure.java-time {:mvn/version \"1.1.0\"}}}' > deps.edn"
 
+alias tmx="~/dev/dot/scripts/tmx.sh"
+
 # tailing logs through pino pretty
 prettylog() {
   tail -n 100 -f "$1" | grep --line-buffered "$2" | npx pino-pretty --levelFirst --translateTime "yyyy/mm/dd | HH:MM:ss"
@@ -52,3 +54,12 @@ prettylog() {
 
 # nvm takes too god damn long to init so we do it on demand only
 alias nvmi="source /usr/share/nvm/init-nvm.sh"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/home/bh/.opam/opam-init/init.zsh' ]] || source '/home/bh/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration

@@ -44,5 +44,8 @@ return {
       }
     })
     vim.keymap.set("n", "<leader>f", "<Cmd>Oil --float<CR>")
+    vim.keymap.set("n", "<leader>F", function()
+      require("oil").open_float(vim.fn.getcwd())
+    end, { desc = "Open Oil in working directory" })
   end
 }
