@@ -13,11 +13,26 @@ return {
           typescript = { "prettierd", "prettier" },
           typescriptreact = { "prettierd", "prettier" },
           css = { "prettierd", "prettier" },
+          cs = { "csharpier" },
+          -- cs = { "dotnet_format" },
         },
         format_after_save = {
           -- These options will be passed to conform.format()
           lsp_fallback = true,
           async = true
+        },
+        formatters = {
+          dotnet_format = {
+            command = "dotnet",
+            args = { "format", "--include", "$FILENAME" },
+            stdin = false,
+          },
+          csharpier = {
+            command = "csharpier",
+            args = { "format", "$FILENAME" }, -- in-place
+            stdin = false,                    -- IMPORTANT: no stdin for your build
+            cwd = require("conform.util").root_file({ "global.json", "*.sln", "*.csproj", ".git" }),
+          },
         },
       })
     end,

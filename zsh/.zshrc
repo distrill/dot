@@ -23,20 +23,23 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='nvim'
 export GOPATH="/home/bh/Downloads/bin/go"
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
+export PATH="$PATH:/home/bh/.dotnet/tools"
 
 
 # getting around
-alias ls="exa -F"
+alias ls="exa -F -1 --icons=always --color=always --group-directories-first"
+alias lst="ls -T -L=3"
 
 # package management
-alias sps="yay -S"
-alias spr="yay -R"
+alias sps="paru -S"
+alias spr="paru -R"
 alias spc="sudo pacman -Rns $(pacman -Qdtq)"
-alias spa="yay -U"
-alias spu="yay -Syu"
+alias spa="paru -U"
+alias spu="paru -Syu"
 
 # editorrrrrrrrrrr
 alias vim="nvim"
+source ~/.config/avante/token
 
 # ssh
 alias ssh="kitten ssh"
@@ -46,6 +49,9 @@ alias clj="clojure"
 alias cljdep="echo '{:deps\n  {clojure.java-time/clojure.java-time {:mvn/version \"1.1.0\"}}}' > deps.edn"
 
 alias tmx="~/dev/dot/scripts/tmx.sh"
+
+# gitetc
+alias gits="lazygit"
 
 # tailing logs through pino pretty
 prettylog() {

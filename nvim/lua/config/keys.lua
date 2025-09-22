@@ -40,6 +40,10 @@ vim.keymap.set("n", "<leader>b", "<cmd>bufdo e<CR>")
 -- search for selected text
 vim.api.nvim_set_keymap('v', '//', [[y/\V<C-r>=escape(@",'/\')<CR><CR>]], { noremap = true })
 
+vim.keymap.set('n', '<leader>z', function()
+  vim.cmd('Focus')
+end, { desc = 'Call :Focus' })
+
 -- navigate diagnostics
 vim.keymap.set("n", "<leader>]", function()
   vim.diagnostic.goto_next({ float = false })
@@ -47,3 +51,7 @@ end, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>[", function()
   vim.diagnostic.goto_prev({ float = false })
 end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>hh", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle inlay hints" })

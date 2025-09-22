@@ -14,7 +14,12 @@ remove Mod4 = Super_L
 add Mod1 = Super_L
 add Mod4 = Alt_L
 
-! move escape to tilde
-! keycode 49 = Escape Mode_switch
-! keysym Escape = Escape
-! keysym Mode_switch = grave asciitilde
+! Map Alt_R as Mode_switch
+keycode 108 = Mode_switch
+
+! Map umlauts and other German characters
+keycode 38 = a A adiaeresis Adiaeresis
+keycode 30 = u U udiaeresis Udiaeresis
+keycode 32 = o O odiaeresis Odiaeresis
+keycode 39 = s S ssharp
+keycode 26 = e E EuroSign

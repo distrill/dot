@@ -138,28 +138,28 @@ alt + p
 alt + n
     xdotool key alt+Right
 
-# german babyyyyyyyyyyyyyyy
-alt + a
-    xdotool type --delay 0 "ä"
-
-alt + o
-    xdotool type --delay 0 "ö"
-
-alt + u
-    xdotool type --delay 0 "ü"
-
-alt + s
-    xdotool type --delay 0 "ß"
-
-# Bind Alt + Shift + a/o/u to type Ä/Ö/Ü
-alt + shift + a
-    xdotool type --delay 0 "Ä"
-
-alt + shift + o
-    xdotool type --delay 0 "Ö"
-
-alt + shift + u
-    xdotool type --delay 0 "Ü"
+# # german babyyyyyyyyyyyyyyy
+# alt + a
+#     xdotool type --delay 0 "ä"
+#
+# alt + o
+#     xdotool type --delay 0 "ö"
+#
+# alt + u
+#     xdotool type --delay 0 "ü"
+#
+# alt + s
+#     xdotool type --delay 0 "ß"
+#
+# # Bind Alt + Shift + a/o/u to type Ä/Ö/Ü
+# alt + shift + a
+#     xdotool type --delay 0 "Ä"
+#
+# alt + shift + o
+#     xdotool type --delay 0 "Ö"
+#
+# alt + shift + u
+#     xdotool type --delay 0 "Ü"
 
 # keyboard
 XF86MonBrightnessUp
@@ -168,3 +168,14 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
   brightnessctl set 5%-
 
+# Increase volume
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Decrease volume
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Play/Pause
+XF86AudioMute
+    playerctl play-pause

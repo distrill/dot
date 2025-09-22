@@ -146,14 +146,6 @@ return {
         },
       })
 
-      lspconfig.typos_lsp.setup({
-        -- Logging level of the language server. Logs appear in :LspLog. Defaults to error.
-        cmd_env = { RUST_LOG = "error" },
-        init_options = {
-          diagnosticSeverity = "Error"
-        }
-      })
-
       lspconfig.clangd.setup {
         cmd = { "clangd", "--compile-commands-dir=build", "--log=verbose" },
         on_attach = function(client)
@@ -184,7 +176,63 @@ return {
         root_dir = lspconfig.util.root_pattern("deps.edn", "project.clj", ".git"),
       })
 
+      -- lspconfig.erlangls.setup {}
+
       lspconfig.gleam.setup({})
+
+
+      -- vim.g.local_lsp_settings = {
+      --   ts_ls = {
+      --     cmd = {
+      --       "docker", "exec", "-i", "nw-migrator",
+      --       "node_modules/.bin/typescript-language-server",
+      --       "--stdio"
+      --     },
+      --     root_dir = function(fname)
+      --       print("ts_ls root_dir:", fname)
+      --       return "/app" -- path *inside* container
+      --     end,
+      --     on_new_config = function(new_config, _)
+      --       new_config.workspace_folders = {
+      --         {
+      --           name = "migrator",
+      --           uri = "file:///app"
+      --         }
+      --       }
+      --       new_config.root_uri = "file:///app"
+      --     end
+      --   },
+      -- }
+
+      -- if vim.g.local_lsp_settings and vim.g.local_lsp_settings.tsserver then
+      --   lspconfig.ts_ls.setup(vim.g.local_lsp_settings.ts_ls)
+      -- else
+      --   lspconfig.ts_ls.setup({})
+      -- end
     end,
   },
 }
+
+-- vim.g.local_lsp_settings = {
+--   ts_ls = {
+--     cmd = { "/home/bh/scripts/tsserver-in-docker.sh" }, -- full path to wrapper
+--     root_dir = function()
+--       return "/app"
+--     end,
+--     on_new_config = function(new_config, _)
+--       new_config.workspace_folders = {
+--         {
+--           name = "migrator",
+--           uri = "file:///app"
+--         }
+--       }
+--       new_config.root_uri = "file:///app"
+--     end
+--   },
+-- }
+--
+-- if vim.g.local_lsp_settings and vim.g.local_lsp_settings.tsserver then
+--   require('lspconfig').ts_ls.setup(vim.g.local_lsp_settings.tsserver)
+-- else
+--   require('lspconfig').ts_ls.setup({})
+-- end
