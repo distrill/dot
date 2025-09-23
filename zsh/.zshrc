@@ -21,19 +21,22 @@ source $ZSH/oh-my-zsh.sh
 
 
 export EDITOR='nvim'
-export GOPATH="/home/bh/Downloads/bin/go"
+export GOPATH="~/Downloads/bin/go"
+export VOLTA_HOME="$HOME/.volta"
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$GOPATH/bin"
-
+export PATH="$PATH:$VOLTA_HOME/bin"
 
 # getting around
-alias ls="exa -F"
+alias ls="eza -F -1 --icons=always --color=always --group-directories-first"
+alias lst="ls -T -L=3"
 
-# package management
-alias sps="yay -S"
-alias spr="yay -R"
-alias spc="sudo pacman -Rns $(pacman -Qdtq)"
-alias spa="yay -U"
-alias spu="yay -Syu"
+source ~/.keys
+
+# workworkworkwokrk
+alias rsapi="source .env && NODE_ENV=development pnpm dev"
+alias rsapp="VITE_NODE_ENV=development pnpm run start"
+alias rsembed="pnpm run dev"
+alias rsscrot="pnpm run dev"
 
 # editorrrrrrrrrrr
 alias vim="nvim"
@@ -55,11 +58,14 @@ prettylog() {
 # nvm takes too god damn long to init so we do it on demand only
 alias nvmi="source /usr/share/nvm/init-nvm.sh"
 
+# nix
+export NIX_CONFIG="experimental-features = nix-command flakes"
 
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/home/bh/.opam/opam-init/init.zsh' ]] || source '/home/bh/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
+
+# pnpm
+export PNPM_HOME="/Users/bh/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

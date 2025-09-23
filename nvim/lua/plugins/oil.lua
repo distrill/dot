@@ -29,6 +29,10 @@ return {
               filter_rules = {
                 autoselect_one = true,
                 include_current_win = true,
+                bo = {
+                  -- Filter out notification windows
+                  filetype = { 'notify', 'noice', 'snacks_notif' },
+                },
               },
             })
 
