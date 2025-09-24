@@ -1,7 +1,7 @@
 * {
   white: #ffffff;
   light-gray: #6B7280; // tundra
-  dark-blue: #111827; // tundra
+  dark-blue: #2e3440; // tundra
   green: #98BC99; // tundra
   blue: #A5B4FC; // tundra
   yellow: #E8D4B0; // tundra

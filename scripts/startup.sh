@@ -26,7 +26,7 @@ fusuma &
 
 # lockscreen
 xautolock -time 5 -locker 'betterlockscreen -l' -corners '00-0' &
-betterlockscreen -w dim &
+betterlockscreen -w &
 
 # status bar
 ~/dev/dot/scripts/polybar.sh &

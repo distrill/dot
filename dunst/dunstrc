@@ -28,7 +28,7 @@
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
     idle_threshold = 120
-    font = Fira Code
+    font = Fira Code 8
     markup = full
 
     # The format of the message.  Possible variables are:
@@ -122,19 +122,19 @@
 
 
 [urgency_low]
-    background = "#111827"
+    background = "#3b4252"
     foreground = "#DDD6FE"
     frame_color ="#99BBBD"
     timeout = 10
 
 [urgency_normal]
-    background = "#111827"
+    background = "#3b4252"
     foreground = "#DDD6FE"
     frame_color = "#99BBBD"
     timeout = 10
 
 [urgency_critical]
-    background = "#111827"
+    background = "#3b4252"
     foreground = "#DDD6FE"
     frame_color = "#99BBBD"
     timeout = 10

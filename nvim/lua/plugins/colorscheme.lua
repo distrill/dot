@@ -1,11 +1,11 @@
 return {
-  "sam4llis/nvim-tundra",
+  "shaunsingh/nord.nvim",
   config = function()
-    require('nvim-tundra').setup({
-    })
-    vim.g.tundra_biome = 'arctic' -- 'arctic' or 'jungle'
-    vim.opt.background = 'dark'
-    vim.cmd('colorscheme tundra')
+    vim.cmd('colorscheme nord')
+
+    -- enable transparent background
+    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
   end
 
   -- "rebelot/kanagawa.nvim",

@@ -17,10 +17,11 @@ local function open_in_selected_window(prompt_bufnr)
   local winid = require('window-picker').pick_window({
     hint = 'floating-letter',
     show_prompt = false,
+    selection_chars = 'abcdefghijkl',
     filter_rules = {
       include_current_win = true,
       bo = {
-        buftype = { "terminal", "nofile", "quickfix", "prompt" },
+        buftype = { "terminal", "nofile", "quickfix", "prompt", "notify", "noice", "snacks_notif" },
       },
       ft = { "TelescopePrompt" },
     },
