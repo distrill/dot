@@ -18,7 +18,7 @@ return {
     },
     -- Behavior settings
     behaviour = {
-      auto_suggestions = true, -- Start with false, enable later if you like it
+      auto_suggestions = false, -- Start with false, enable later if you like it
       auto_set_highlight_group = true,
       auto_set_keymaps = true,
       auto_apply_diff_after_generation = false, -- You want control over this

@@ -51,15 +51,24 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = function()
+      local actions = require('telescope.actions')
       require('telescope').setup {
         defaults = {
           file_ignore_patterns = { "node_modules", "vendor", "build", "dist" },
           mappings = {
             i = {
               ["<CR>"] = open_in_selected_window,
+              ["<C-k>"] = function(prompt_bufnr)
+                actions.smart_send_to_qflist(prompt_bufnr)
+                actions.open_qflist(prompt_bufnr)
+              end,
             },
             n = {
               ["<CR>"] = open_in_selected_window,
+              ["<C-q>"] = function(prompt_bufnr)
+                actions.smart_send_to_qflist(prompt_bufnr)
+                actions.open_qflist(prompt_bufnr)
+              end,
             },
           }
         }
