@@ -6,6 +6,8 @@ return {
     -- enable transparent background
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+    vim.api.nvim_set_hl(0, "Visual", { bg = "#81a1c1", fg = "#2E3440" })
   end
 
   -- "rebelot/kanagawa.nvim",

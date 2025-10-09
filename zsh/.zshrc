@@ -28,6 +28,8 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.ghcup/bin"
 export PATH="$PATH:$VOLTA_HOME/bin"
 
+# i hate docker so god damn much
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 
 # getting around
 alias ls="exa -F -1 --icons=always --color=always --group-directories-first"

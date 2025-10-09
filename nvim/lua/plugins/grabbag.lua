@@ -1,25 +1,4 @@
 return {
-  { -- better quickfix
-    "kevinhwang91/nvim-bqf",
-    ft = "qf",
-    config = function()
-      vim.keymap.set("n", "<leader>p", function()
-        vim.diagnostic.setqflist()
-      end)
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "qf",
-        callback = function()
-          vim.keymap.set("n", "d", function()
-            local idx = vim.fn.line(".") - 1
-            local qflist = vim.fn.getqflist()
-            table.remove(qflist, idx + 1) -- Lua index is 1-based
-            vim.fn.setqflist(qflist, 'r') -- 'r' = replace
-          end, { buffer = true })
-        end,
-      })
-    end,
-  },
   { -- persistent undo
     "mbbill/undotree",
     config = function()
