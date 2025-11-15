@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 
 # plugins are in ~/.oh-my-zsh/plugins/*
 # custom plugins in ~/.oh-my-zsh/custom/plugins/
-# plugins=(git docker zsh-autosuggestions)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting)
 
 
 export EDITOR='nvim'

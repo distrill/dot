@@ -36,10 +36,11 @@ local function open_in_selected_window(prompt_bufnr)
       local line = entry.lnum or 1
       local col = entry.col or 0
 
-      vim.api.nvim_win_set_cursor(0, { line, col + 1 }) -- move cursor to line and column that were in the picker match result
-      vim.fn.setreg("/", "\\c" .. search_term)          -- set the search register to the picker search term
-      vim.o.hlsearch = true                             -- highlight the search term
-      vim.cmd("normal! NNnl")                           -- hackery to trigger the iterative search hints and ensure the cursor is at the start of the search term
+      vim.api.nvim_win_set_cursor(0, { line, col + 1 })
+      vim.fn.setreg("/", "\\c" .. search_term)
+      vim.o.hlsearch = true
+      -- safer than vim.cmd("normal! NNnl")
+      vim.api.nvim_feedkeys("NNnl", "n", false)
     end
   end
 end
@@ -54,7 +55,12 @@ return {
       local actions = require('telescope.actions')
       require('telescope').setup {
         defaults = {
-          file_ignore_patterns = { "node_modules", "vendor", "build", "dist" },
+          file_ignore_patterns = {
+            "node_modules",
+            -- "vendor",
+            "build",
+            "dist"
+          },
           mappings = {
             i = {
               ["<CR>"] = open_in_selected_window,

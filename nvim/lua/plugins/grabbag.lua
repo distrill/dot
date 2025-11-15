@@ -24,5 +24,20 @@ return {
         end,
       })
     end
+  },
+  { -- yank current line to github context
+    "ruifm/gitlinker.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require "gitlinker".setup()
+    end
+  },
+  { -- pretty bits 'n bobs like blinking and flashing on copy paste etc
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10, -- Low priority to catch other plugins' keybindings
+    config = function()
+      require("tiny-glimmer").setup()
+    end,
   }
 }

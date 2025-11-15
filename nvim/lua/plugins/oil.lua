@@ -1,8 +1,11 @@
 return {
   'stevearc/oil.nvim',
-  ---@module 'oil'
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
+    -- If possible, set winborder early so floats draw borders by default
+    vim.o.winborder = "rounded"
+
+    -- Make sure highlight groups are applied after colorscheme / highlights
     vim.cmd([[
       hi NormalFloat guibg=NONE
       hi FloatBorder guibg=NONE
@@ -30,7 +33,6 @@ return {
                 autoselect_one = true,
                 include_current_win = true,
                 bo = {
-                  -- Filter out notification windows
                   filetype = { 'notify', 'noice', 'snacks_notif' },
                 },
               },
@@ -43,13 +45,28 @@ return {
           end
         end,
       },
+
       float = {
         padding = 3,
-      }
+        border = "rounded", -- explicitly request a border style
+        win_options = {
+          winblend = 0,
+        },
+        override = function(conf)
+          -- You can optionally adjust `conf.border` here if needed
+          -- For example, force it always:
+          conf.border = "rounded"
+          return conf
+        end,
+      },
+
+      -- You may also want to make sure you don’t override float settings elsewhere
+      -- Keep any other oil setup fields you have (view_options, preview_win, etc.)
     })
+
     vim.keymap.set("n", "<leader>f", "<Cmd>Oil --float<CR>")
     vim.keymap.set("n", "<leader>F", function()
       require("oil").open_float(vim.fn.getcwd())
     end, { desc = "Open Oil in working directory" })
-  end
+  end,
 }
