@@ -43,8 +43,8 @@ vim.opt.colorcolumn = "80"
 vim.opt.laststatus = 3
 
 
--- no background colors on floating window borders
-vim.cmd([[
-  hi NormalFloat guibg=NONE
-  hi FloatBorder guibg=NONE
-]])
+-- -- no background colors on floating window borders
+-- vim.cmd([[
+--   hi NormalFloat guibg=NONE
+--   hi FloatBorder guibg=NONE
+-- ]])

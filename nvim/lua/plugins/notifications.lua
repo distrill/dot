@@ -15,7 +15,7 @@ return {
       timeout = 1200,
       top_down = false,
       stages = "fade",
-      -- level = vim.log.levels.WARN, -- hide INFO-level spam
+      level = vim.log.levels.WARN, -- hide INFO-level spam
     })
     vim.notify = notify
     require("noice").setup({

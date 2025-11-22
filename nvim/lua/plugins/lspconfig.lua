@@ -158,31 +158,13 @@ return {
         root_markers = { "deps.edn", "project.clj", ".git" }, -- replace util.root_pattern
       })
 
-      -- vim.lsp.config("gleam", {
-      --   cmd = { "gleam", "lsp" },
-      --   root_markers = { "gleam.toml", ".git" },
-      --   filetypes = { "gleam" },
-      -- })
+      -- Gleam
       require('lspconfig').gleam.setup({
         cmd = { "gleam", "lsp" },
         root_dir = require('lspconfig').util.root_pattern("gleam.toml", ".git"),
         filetypes = { "gleam" },
       })
-      -- Gleam
-      -- vim.lsp.config("gleam", {
-      --   -- cmd = { "/home/bh/dev/dot/scripts/gleamlsp.sh" },
-      --   -- root_markers = { "gleam.toml", ".git" },
-      --   -- filetypes = { "gleam" },
-      -- })
-      -- local lspconfig = require('lspconfig')
-      -- lspconfig.gleam.setup({
-      -- cmd = { "/home/bh/dev/dot/scripts/gleamlsp.sh" },
-      --   root_dir = function(fname)
-      --     return lspconfig.util.find_git_root(fname) or lspconfig.util.path.dirname(fname)
-      --   end,
-      --   filetypes = { "gleam" },
-      --   single_file_support = true,
-      -- })
+
 
       -- Go
       -- vim.lsp.config("gopls", {})
@@ -213,8 +195,6 @@ return {
           },
         }
       })
-
-      vim.lsp.config("zls", {})
     end,
   },
 }
