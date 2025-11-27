@@ -1,31 +1,44 @@
 # Based on the great ys theme (http://ysmood.org/wp/2013/03/my-ys-terminal-theme/)
 
-# Machine name.
+# ──────────────────────────────────────────────
+# SSH detection
+# ──────────────────────────────────────────────
+if [[ -n $SSH_CONNECTION ]]; then
+  SSH_PREFIX="%{$fg[red]%}[SSH]%{$reset_color%} |> "
+else
+  SSH_PREFIX=""
+fi
+
+# ──────────────────────────────────────────────
+# Machine name
+# ──────────────────────────────────────────────
 function box_name {
-    [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
+  [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
 }
 
-# Directory info.
+# ──────────────────────────────────────────────
+# Directory info
+# ──────────────────────────────────────────────
 local current_dir='${PWD/#$HOME/~}'
 
-# VCS
+# ──────────────────────────────────────────────
+# VCS info
+# ──────────────────────────────────────────────
 YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}-%{$reset_color%} "
 YS_VCS_PROMPT_PREFIX2=":%{$fg[cyan]%}"
 YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}✖︎"
 YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}●"
 
-# Git info.
+# Git info
 local git_info='$(git_prompt_info)'
 ZSH_THEME_GIT_PROMPT_PREFIX="${YS_VCS_PROMPT_PREFIX1}git${YS_VCS_PROMPT_PREFIX2}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
 ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
 ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
-# HG info
-local hg_info='$(ys_hg_prompt_info)'
+# Mercurial info
 ys_hg_prompt_info() {
-  # make sure this is a hg dir
   if [ -d '.hg' ]; then
     echo -n "${YS_VCS_PROMPT_PREFIX1}hg${YS_VCS_PROMPT_PREFIX2}"
     echo -n $(hg branch 2>/dev/null)
@@ -37,9 +50,15 @@ ys_hg_prompt_info() {
     echo -n "$YS_VCS_PROMPT_SUFFIX"
   fi
 }
+local hg_info='$(ys_hg_prompt_info)'
 
-# Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $
+# ──────────────────────────────────────────────
+# Prompt definitions
+# ──────────────────────────────────────────────
+
+# Normal user prompt
 PROMPT="\
+${SSH_PREFIX}\
 %{$fg[cyan]%}%n\
 %{$fg[white]%}@\
 %{$fg[green]%}$(box_name) \
@@ -49,8 +68,10 @@ ${hg_info}\
 ${git_info} 
 %{$terminfo[bold]$fg[white]%}→ %{$reset_color%}"
 
+# Root prompt (different color scheme)
 if [[ "$USER" == "root" ]]; then
-PROMPT="
+  PROMPT="\
+${SSH_PREFIX}\
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
 %{$fg[white]%}at \
@@ -62,3 +83,4 @@ ${git_info} \
 %{$fg[white]%}[%*]
 %{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
 fi
+

@@ -17,7 +17,7 @@ source $ZSH/oh-my-zsh.sh
 
 # plugins are in $HOME/.oh-my-zsh/plugins/*
 # custom plugins in $HOME/.oh-my-zsh/custom/plugins/
-# plugins=(git docker zsh-autosuggestions)
+plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting)
 
 
 export EDITOR='nvim'
@@ -44,9 +44,6 @@ alias spu="yay -Syu"
 
 # editorrrrrrrrrrr
 alias vim="nvim"
-
-# ssh
-alias ssh="kitten ssh"
 
 # language specific
 alias clj="clojure"
