@@ -15,8 +15,8 @@
     padding = 32
     horizontal_padding = 32
 
-    frame_width = 2
-    corner_radius = 5
+    frame_width = 1
+    corner_radius = 4
     separator_color = frame
 
     # Sort messages by urgency.
@@ -28,7 +28,7 @@
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
     idle_threshold = 120
-    font = Fira Code 8
+    font = CommitMono Nerd Font Propo 11
     markup = full
 
     # The format of the message.  Possible variables are:
@@ -122,19 +122,19 @@
 
 
 [urgency_low]
-    background = "#3b4252"
-    foreground = "#DDD6FE"
-    frame_color ="#99BBBD"
+    background = "#191724"
+    foreground = "#908caa"
+    frame_color = "#908caa"
     timeout = 10
 
 [urgency_normal]
-    background = "#3b4252"
-    foreground = "#DDD6FE"
-    frame_color = "#99BBBD"
+    background = "#191724"
+    foreground = "#e0def4"
+    frame_color = "#908caa"
     timeout = 10
 
 [urgency_critical]
-    background = "#3b4252"
-    foreground = "#DDD6FE"
-    frame_color = "#99BBBD"
-    timeout = 10
+    background = "#191724"
+    foreground = "#e0def4"
+    frame_color = "#eb6f92"
+    timeout = 0

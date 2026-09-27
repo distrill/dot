@@ -3,25 +3,41 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
+      -- The default markdown injections include a fenced-code rule using the
+      -- set-lang-from-info-string! directive, which crashes on stale nodes in LSP
+      -- hover popups. Re-declare the query WITHOUT that rule, but keep the
+      -- markdown_inline injection so bold/italic/inline-code still render.
+      vim.treesitter.query.set("markdown", "injections", [[
+        ([
+          (inline)
+          (pipe_table_cell)
+        ] @injection.content
+          (#set! injection.language "markdown_inline"))
+
+        ((html_block) @injection.content
+          (#set! injection.language "html")
+          (#set! injection.combined)
+          (#set! injection.include-children))
+
+        ((minus_metadata) @injection.content
+          (#set! injection.language "yaml")
+          (#offset! @injection.content 1 0 -1 0)
+          (#set! injection.include-children))
+
+        ((plus_metadata) @injection.content
+          (#set! injection.language "toml")
+          (#offset! @injection.content 1 0 -1 0)
+          (#set! injection.include-children))
+      ]])
+      vim.treesitter.query.set("markdown_inline", "injections", "")
+
       require 'nvim-treesitter.configs'.setup {
-        -- A list of parser names, or "all"
         ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "go", "ocaml", "regex" },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
         auto_install = true,
-
         highlight = {
-          -- `false` will disable the whole extension
           enable = true,
-
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
+          disable = { "markdown", "markdown_inline" },
           additional_vim_regex_highlighting = false,
         },
       }

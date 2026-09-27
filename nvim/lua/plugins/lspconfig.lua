@@ -140,15 +140,7 @@ return {
       vim.lsp.config("clangd", {
         cmd = { "clangd", "--compile-commands-dir=build", "--log=verbose" },
         init_options = { clangdFileStatus = true },
-        -- prefer setting diagnostics globally (above), but you can still tweak here
-        handlers = {
-          ["textDocument/publishDiagnostics"] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics,
-            { virtual_text = false, signs = true, update_in_insert = false }
-          ),
-        },
-        -- Example include path-like tweak (clangd-specific settings live elsewhere normally)
-        root_markers = { "compile_commands.json", ".clangd", ".git" }, -- see lsp docs for root markers :contentReference[oaicite:6]{index=6}
+        root_markers = { "compile_commands.json", ".clangd", ".git" },
       })
 
       -- Clojure
@@ -159,11 +151,12 @@ return {
       })
 
       -- Gleam
-      require('lspconfig').gleam.setup({
+      vim.lsp.config("gleam", {
         cmd = { "gleam", "lsp" },
-        root_dir = require('lspconfig').util.root_pattern("gleam.toml", ".git"),
+        root_markers = { "gleam.toml", ".git" },
         filetypes = { "gleam" },
       })
+      vim.lsp.enable("gleam")
 
 
       -- Go
@@ -178,14 +171,6 @@ return {
       -- If you disable mason-lspconfig's automatic_enable, enable manually:
       -- vim.lsp.enable({ "lua_ls", "ts_ls", "gopls", "clangd", "clojure_lsp", "gleam", "eslint", "typos_lsp" })
 
-      -- Borders for hover + signature help
-      vim.lsp.handlers["textDocument/hover"] =
-          vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
-      vim.lsp.handlers["textDocument/signatureHelp"] =
-
-          vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-
       vim.lsp.config('rescriptls', {
         settings = {
           rescript = {
@@ -195,6 +180,9 @@ return {
           },
         }
       })
+
+      -- nix!
+      vim.lsp.config('nil_ls', {})
     end,
   },
 }

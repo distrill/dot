@@ -45,14 +45,21 @@ alias spu="yay -Syu"
 # editorrrrrrrrrrr
 alias vim="nvim"
 
+alias gs="git-spice"
+
 # language specific
 alias clj="clojure"
 alias cljdep="echo '{:deps\n  {clojure.java-time/clojure.java-time {:mvn/version \"1.1.0\"}}}' > deps.edn"
 
 alias tmx="$HOME/dev/dot/scripts/tmx.sh"
 
+alias gui="start-hyprland"
+
 # gitetc
 alias gits="lazygit"
+
+alias usbmnt="udisksctl mount -b"
+alias usbumnt="udisksctl unmount -b"
 
 # tailing logs through pino pretty
 prettylog() {
@@ -61,6 +68,8 @@ prettylog() {
 
 # nvm takes too god damn long to init so we do it on demand only
 alias nvmi="source /usr/share/nvm/init-nvm.sh"
+
+alias agenix="nix shell github:ryantm/agenix --command agenix"
 
 
 # BEGIN opam configuration

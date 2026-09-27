@@ -45,6 +45,7 @@ return {
       },
       float = {
         padding = 3,
+        border = "rounded",
       }
     })
     vim.keymap.set("n", "<leader>f", "<Cmd>Oil --float<CR>")

@@ -1,105 +1,91 @@
 * {
-  white: #ffffff;
-  light-gray: #6B7280; // tundra
-  dark-blue: #2e3440; // tundra
-  green: #98BC99; // tundra
-  blue: #A5B4FC; // tundra
-  yellow: #E8D4B0; // tundra
-  cyan: #99BBBD; // tundra
-  violet: #DDD6FE; // tundra
-
-  window-border-color: var(cyan);
-  bright-text-color: var(violet);
-  mellow-text-color: var(light-gray);
-  main-background-color: var(dark-blue);
-
-  separatorcolor: var(dark-blue);
+  white:   #ffffff;
+  base:    #191724;
+  overlay: #26233a;
+  subtle:  #908caa;
+  text:    #e0def4;
+  pine:    #31748f;
+  gold:    #f6c177;
+  rose:    #ebbcba;
+  iris:    #c4a7e7;
 }
 
 message {
-    border: none;
+  border: none;
 }
 
 listview {
-    border: none;
+  border: none;
 }
 
 sidebar {
-    border: none;
+  border: none;
 }
 
 window {
-  background-color: var(main-background-color);
-  padding: 40px;
-  border-radius: 5px;
-  border-color: var(window-border-color);
-  border: 2px;
+  background-color: var(base);
+  padding:          24px;
+  border-radius:    4px;
+  border-color:     var(subtle);
+  border:           1px;
 }
 
 entry {
-  text-color: var(mellow-text-color);
-  background-color: var(main-background-color);
-  placeholder: ">";
-  cursor: pointer;
+  background-color: var(base);
+  text-color:       var(white);
+  placeholder:      "";
+  cursor:           pointer;
 }
 
 prompt {
-  text-color: var(mellow-text-color);
-  underline: none;
+  text-color: var(subtle);
+  underline:  none;
 }
 
 listview {
-  lines: 3;
+  lines:     3;
   scrollbar: false;
 }
 
 element {
-  padding: 20px;
-  background-color: var(main-background-color);
+  padding:          0px;
+  background-color: var(base);
 }
-element selected normal normal-selected {
-  text-color: var(bright-text-color);
-}
+
 element selected {
-  text-color: var(bright-text-color);
+  text-color: var(gold);
 }
-element normal.normal {
-  background-color: var(main-background-color);
-}
-element alternate.normal {
-  background-color: var(main-background-color);
-}
-element selected.active {
-  text-color: var(bright-text-color);
-  background-color: var(main-background-color);
-}
-element normal.active {
-  background-color: var(main-background-color);
-}
+
+element normal.normal,
+element alternate.normal,
+element normal.active,
 element alternate.active {
-  background-color: var(main-background-color);
+  background-color: var(base);
 }
-element selected.normal {
-  text-color: var(bright-text-color);
-  background-color: var(main-background-color);
+
+element selected.normal,
+element selected.active {
+  text-color:       var(gold);
+  background-color: var(base);
 }
+
 element-text {
-  text-color: var(mellow-text-color);
-  background-color: var(main-background-color);
+  background-color: var(base);
+  text-color:       var(subtle);
 }
 
 element-text selected.normal {
-  text-color: var(bright-text-color);
+  text-color: var(gold);
 }
 
 configuration {
-  font: "Fira Code Light 16";
+  font: "CommitMono Nerd Font Propo 13";
   timeout {
     action: "kb-cancel";
-    delay: 0;
+    delay:  0;
   }
   filebrowser {
     directories-first: true;
-    sorting-method: "name";
+    sorting-method:    "name";
   }
 }

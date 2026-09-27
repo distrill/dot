@@ -1,2 +1,7 @@
 Xcursor.size: 12
 Xcursor.theme: Adwaita
+Xft.dpi: 192
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: none

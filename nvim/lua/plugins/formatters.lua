@@ -14,6 +14,7 @@ return {
           typescriptreact = { "prettierd", "prettier" },
           css = { "prettierd", "prettier" },
           cs = { "csharpier" },
+          nix = { "nixfmt" },
           -- cs = { "dotnet_format" },
         },
         format_after_save = {
