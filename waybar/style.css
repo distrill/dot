@@ -1,0 +1,106 @@
+/* Minimal waybar — monospace, Rose Pine palette, lots of breathing room */
+
+/* Rose Pine
+   base:    #191724   surface: #1f1d2e   overlay: #26233a
+   muted:   #6e6a86   subtle:  #908caa   text:    #e0def4
+   love:    #eb6f92   gold:    #f6c177   rose:    #ebbcba
+   pine:    #31748f   foam:    #9ccfd8   iris:    #c4a7e7
+*/
+
+* {
+  font-family: "CommitMono Nerd Font Propo", monospace;
+  font-size: 16px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  padding: 4px;
+}
+
+window#waybar {
+  background: rgba(25, 23, 36, 1); /* base */
+  color: #908caa;                   /* subtle */
+  border-radius: 4px;
+  border: 1px solid #908caa;        /* subtle */
+}
+
+/* ── Tooltips ─────────────────────────────────────── */
+
+tooltip {
+  background: #1f1d2e;     /* surface */
+  color: #ebbcba;          /* rose */
+  border: 1px solid #908caa; /* subtle */
+  border-radius: 4px;
+}
+
+tooltip label {
+  color: #ebbcba;          /* rose */
+}
+
+/* ── Left ─────────────────────────────────────────── */
+
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button {
+  padding: 0 10px;
+  color: #6e6a86;          /* muted */
+  background: transparent;
+  transition: color 0.15s ease;
+}
+
+#workspaces button:hover {
+  color: #908caa;          /* subtle */
+  background: transparent;
+  box-shadow: none;
+}
+
+#workspaces button.active {
+  color: #f6c177;          /* gold */
+}
+
+#workspaces button.occupied {
+  color: #908caa;          /* subtle */
+}
+
+/* ── Center ───────────────────────────────────────── */
+
+#mpris {
+  color: #908caa;          /* subtle */
+  padding: 0 12px;
+}
+
+#mpris.paused {
+  color: #6e6a86;          /* muted */
+}
+
+/* ── Right ────────────────────────────────────────── */
+
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#network {
+  padding: 0 12px;
+  color: #908caa;          /* subtle */
+}
+
+#clock {
+  color: #f6c177;          /* gold */
+}
+
+#pulseaudio.muted {
+  color: #6e6a86;          /* muted */
+}
+
+#network.disconnected {
+  color: #6e6a86;          /* muted */
+}
+
+/* subtle separator between right modules */
+/* #cpu, */
+/* #memory, */
+/* #pulseaudio, */
+/* #network { */
+/*   border-right: 1px solid rgba(255, 255, 255, 0.05); */
+/* } */
